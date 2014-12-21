@@ -10,7 +10,6 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 	

@@ -2,7 +2,15 @@
 <resources>
 
     <string name="app_name">4 Squares</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+	
+    <color name="navy">#2c3e50</color>
+    <color name="red">#e64c3c</color>
+    <color name="red_press">#c0392b</color>
+    <color name="yellow">#f1c40f</color>
+    <color name="yellow_press">#f39c12</color>
+    <color name="green">#2ecc71</color>
+    <color name="green_press">#27ae60</color>
+    <color name="blue">#3498db</color>
+    <color name="blue_press">#2980b9</color>
 </resources>
