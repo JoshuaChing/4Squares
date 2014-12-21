@@ -7,6 +7,11 @@
     <string name="defaultScore">0</string>
     <string name="defaultTimer">30.00</string>
     <string name="gamePrompt">What color is this?</string>
+    <string name="gameOver">Game Over</string>
+    <string name="bestScore">Best: 10</string>
+    <string name="endScore">Score: 5</string>
+    <string name="retry">Retry</string>
+    <string name="menu">Menu</string>
     
     <color name="navy">#2c3e50</color>
     <color name="red">#e64c3c</color>
@@ -17,6 +22,10 @@
     <color name="green_press">#27ae60</color>
     <color name="blue">#3498db</color>
     <color name="blue_press">#2980b9</color>
-    <color name="cloud">#ecf0f1</color>
+    <color name="cloud">#ffffff</color>
+    <color name="cloud_dark">#ecf0f1</color>
+    <color name="gray">#95a5a6</color>
+    <color name="gray_press">#7f8c8d</color>
+    <color name="black_trans50">#80000000</color>
     
 </resources>

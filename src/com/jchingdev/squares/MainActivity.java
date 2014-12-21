@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
 	private TextView scoreView;
 	private TextView timerView;
 	private Button answerButton;
+	private RelativeLayout gameOverView;
 	
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
 	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
@@ -62,6 +64,7 @@ public class MainActivity extends Activity {
 		square3 = (Button)findViewById(R.id.square3);
 		square4 = (Button)findViewById(R.id.square4);
 		answerButton = (Button)findViewById(R.id.answer);
+		gameOverView = (RelativeLayout)findViewById(R.id.gameOverView);
 	    //calculate and set square dimensions
 	    squareSize = (dpWidth-80)/2.0;
 		setSquareSize(square1, (int)squareSize, (int)squareSize);
@@ -127,6 +130,10 @@ public class MainActivity extends Activity {
 		c[j] = temp;
 	}
 	
+	public void answerClicked(View view){
+		
+	}
+	
 	public void square1Clicked(View view){
 		checkAnswer(0);
 	}
@@ -188,6 +195,7 @@ public class MainActivity extends Activity {
 		}
 		else{
 			timer.cancel();
+			gameOver();
 		}
 	}
 	
@@ -200,8 +208,19 @@ public class MainActivity extends Activity {
 
 		     public void onFinish() {
 		    	 timerView.setText("0.00");
+		    	 gameOver();
 		     }
 		  }.start();
+	}
+	
+	//function called when game is over
+	private void gameOver(){
+		gameOverView.setVisibility(View.VISIBLE);
+		square1.setEnabled(false);
+		square2.setEnabled(false);
+		square3.setEnabled(false);
+		square4.setEnabled(false);
+		answerButton.setEnabled(false);
 	}
 	
 }
