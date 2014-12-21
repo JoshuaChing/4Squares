@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
@@ -24,11 +25,12 @@ public class MainActivity extends Activity {
 	private float dpWidth;
 	private double squareSize;
 	
-	//square button views
+	//game views
 	private Button square1;
 	private Button square2;
 	private Button square3;
 	private Button square4;
+	private TextView scoreView;
 	
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
 	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
@@ -47,7 +49,8 @@ public class MainActivity extends Activity {
 	    display.getMetrics(outMetrics);
 	    density  = getResources().getDisplayMetrics().density;
 	    dpWidth  = outMetrics.widthPixels / density;
-	    //find square views
+	    //find game views
+	    scoreView = (TextView)findViewById(R.id.score);
 	    square1 = (Button)findViewById(R.id.square1);
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
@@ -155,22 +158,25 @@ public class MainActivity extends Activity {
 	private void checkAnswer(int input){
 		//if user gets the correct answer
 		if (squares[input] == answer){
-			score++;						//add score
-			answer = random.nextInt(4);		//new answer
-			shuffleArray(squares);			//shuffle the squares user see
 			
-			//change colours of squares
+			//set new score
+			score++;
+			scoreView.setText(String.valueOf(score));
+			
+			//set new answer
+			answer = random.nextInt(4);		//new answer
+			
+			//change new colours of squares
+			shuffleArray(squares);
 			setSquareColour(squares[0],square1);
 			setSquareColour(squares[1],square2);
 			setSquareColour(squares[2],square3);
 			setSquareColour(squares[3],square4);
-			
-			System.out.println(answer);
+
 		}
 		else{
 			score=0;
-			System.out.println("you lose");
-			System.out.println(answer);
+			scoreView.setText(String.valueOf(score));
 		}
 	}
 }

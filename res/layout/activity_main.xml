@@ -11,6 +11,17 @@
         android:layout_height="0dp"
         android:layout_centerVertical="true"/>
     
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultScore"
+        android:textColor="@color/cloud"
+        android:textSize="40sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"/>
+    
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
