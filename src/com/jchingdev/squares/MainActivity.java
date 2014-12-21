@@ -3,9 +3,12 @@ package com.jchingdev.squares;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
 import android.view.WindowManager;
@@ -14,7 +17,8 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	
 	//dimension variables
-	private int displayX;
+	private float density;
+	private float dpWidth;
 	private double squareSize;
 	
 	//square button views
@@ -27,18 +31,20 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//get display dimensions
+		//get display dimensions in dp
 		WindowManager wm = ((WindowManager)this.getSystemService(Context.WINDOW_SERVICE));
 	    Display display = wm.getDefaultDisplay();
-	    Point point = getDisplaySize(display);
-	    displayX = Integer.parseInt(String.valueOf(point.x));
+	    DisplayMetrics outMetrics = new DisplayMetrics();
+	    display.getMetrics(outMetrics);
+	    density  = getResources().getDisplayMetrics().density;
+	    dpWidth  = outMetrics.widthPixels / density;
 	    //find square views
 	    square1 = (Button)findViewById(R.id.square1);
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
 		square4 = (Button)findViewById(R.id.square4);
 	    //calculate and set square dimensions
-	    squareSize = (displayX-40)/2.0;
+	    squareSize = (dpWidth-80)/2.0;
 		setSquareSize(square1, (int)squareSize);
 		setSquareSize(square2, (int)squareSize);
 		setSquareSize(square3, (int)squareSize);
@@ -66,13 +72,14 @@ public class MainActivity extends Activity {
 		return point;
 	}
 	
-	//set square dimensions
+	//set square dimensions (convert dp back to px)
 	private void setSquareSize(Button b, int i){
+		Resources r = getResources();
+		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, r.getDisplayMetrics());
 		android.view.ViewGroup.LayoutParams params = null;
 		params = b.getLayoutParams();
-		params.width=i;
-		params.height=i;
+		params.width=(int) px;
+		params.height=(int) px;
 		b.setLayoutParams(params);
 	}
-	
 }
