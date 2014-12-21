@@ -1,5 +1,6 @@
 package com.jchingdev.squares;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import android.annotation.SuppressLint;
@@ -9,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -31,6 +33,7 @@ public class MainActivity extends Activity {
 	private Button square3;
 	private Button square4;
 	private TextView scoreView;
+	private TextView timerView;
 	private Button answerButton;
 	
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
@@ -38,6 +41,7 @@ public class MainActivity extends Activity {
 	private Random random;
 	private int answer;
 	private int score;
+	private CountDownTimer timer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class MainActivity extends Activity {
 	    dpWidth  = outMetrics.widthPixels / density;
 	    //find game views
 	    scoreView = (TextView)findViewById(R.id.score);
+	    timerView = (TextView)findViewById(R.id.timer);
 	    square1 = (Button)findViewById(R.id.square1);
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
@@ -69,6 +74,7 @@ public class MainActivity extends Activity {
 		answer = random.nextInt(4);
 		setSquareColour(answer,answerButton);
 		score = 0;
+		startTimer();
 	}
 
 	@Override
@@ -181,8 +187,21 @@ public class MainActivity extends Activity {
 
 		}
 		else{
-			score=0;
-			scoreView.setText(String.valueOf(score));
+			timer.cancel();
 		}
 	}
+	
+	//start timer object
+	private void startTimer(){
+		timer = new CountDownTimer(30000, 10) {
+		     public void onTick(long millisUntilFinished) {
+		         timerView.setText(String.valueOf(new DecimalFormat("##.##").format((millisUntilFinished/1000.0))));
+		     }
+
+		     public void onFinish() {
+		    	 timerView.setText("0.00");
+		     }
+		  }.start();
+	}
+	
 }
