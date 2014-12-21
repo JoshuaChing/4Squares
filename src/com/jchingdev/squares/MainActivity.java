@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -29,9 +30,11 @@ public class MainActivity extends Activity {
 	private Button square3;
 	private Button square4;
 	
-	//game variables
-	private char[] squares = {'r','y','g','b'};
+	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
+	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
 	private Random random;
+	private int answer;
+	private int score;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class MainActivity extends Activity {
 		setSquareSize(square4, (int)squareSize);
 		//game variables
 		random = new Random();
+		answer = random.nextInt(4);
+		score = 0;
 	}
 
 	@Override
@@ -92,19 +97,80 @@ public class MainActivity extends Activity {
 	}
 	
 	//fisher-yates modern shuffle algorithm logic
-	private void shuffleArray(char[] c){
-		int index = c.length;
+	private void shuffleArray(int[] i){
+		int index = i.length;
 		
 		while (--index > 0){
 			int randomIndex = random.nextInt(index+1);
-			swapValues(c,index,randomIndex);
+			swapValues(i,index,randomIndex);
 		}
 	}
 	
 	//helper function to swap values of an array based on 2 indexes
-	private void swapValues(char[] c, int i, int j){
-		char temp = c[i];
+	private void swapValues(int[] c, int i, int j){
+		int temp = c[i];
 		c[i] = c[j];
 		c[j] = temp;
+	}
+	
+	public void square1Clicked(View view){
+		checkAnswer(0);
+	}
+	
+	public void square2Clicked(View view){
+		checkAnswer(1);
+	}
+	
+	public void square3Clicked(View view){
+		checkAnswer(2);
+	}
+	
+	public void square4Clicked(View view){
+		checkAnswer(3);
+	}
+	
+	public void setSquareColour(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.red_square);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.yellow_square);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.green_square);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.blue_square);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.red_square);
+		}
+	}
+	
+	//called when square is clicked
+	//where answer is the correct answer for the current round
+	//where input is the square the user clicked
+	//1 = r, 2 = y, 3 = g, 4 = b
+	private void checkAnswer(int input){
+		//if user gets the correct answer
+		if (squares[input] == answer){
+			score++;						//add score
+			answer = random.nextInt(4);		//new answer
+			shuffleArray(squares);			//shuffle the squares user see
+			
+			//change colours of squares
+			setSquareColour(squares[0],square1);
+			setSquareColour(squares[1],square2);
+			setSquareColour(squares[2],square3);
+			setSquareColour(squares[3],square4);
+			
+			System.out.println(answer);
+		}
+		else{
+			score=0;
+			System.out.println("you lose");
+			System.out.println(answer);
+		}
 	}
 }

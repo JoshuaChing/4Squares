@@ -22,7 +22,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_above="@+id/square3"
-        android:background="@drawable/red_square"/>
+        android:background="@drawable/red_square"
+        android:onClick="square1Clicked"/>
     
     <Button
         android:id="@+id/square2"
@@ -30,14 +31,16 @@
         android:layout_height="50dp"
         android:layout_toRightOf="@+id/square1"
         android:layout_above="@+id/square3"
-        android:background="@drawable/yellow_square" />
+        android:background="@drawable/yellow_square"
+        android:onClick="square2Clicked"/>
     
    <Button
         android:id="@+id/square3"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/green_square" />
+        android:background="@drawable/green_square"
+        android:onClick="square3Clicked"/>
     
     <Button
         android:id="@+id/square4"
@@ -45,7 +48,8 @@
         android:layout_height="50dp"
         android:layout_toRightOf="@+id/square3"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/blue_square" />
+        android:background="@drawable/blue_square"
+        android:onClick="square4Clicked"/>
     
     </RelativeLayout>
 
