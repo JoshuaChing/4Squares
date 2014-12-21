@@ -1,5 +1,7 @@
 package com.jchingdev.squares;
 
+import java.util.Random;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -27,6 +29,10 @@ public class MainActivity extends Activity {
 	private Button square3;
 	private Button square4;
 	
+	//game variables
+	private char[] squares = {'r','y','g','b'};
+	private Random random;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +55,8 @@ public class MainActivity extends Activity {
 		setSquareSize(square2, (int)squareSize);
 		setSquareSize(square3, (int)squareSize);
 		setSquareSize(square4, (int)squareSize);
+		//game variables
+		random = new Random();
 	}
 
 	@Override
@@ -81,5 +89,22 @@ public class MainActivity extends Activity {
 		params.width=(int) px;
 		params.height=(int) px;
 		b.setLayoutParams(params);
+	}
+	
+	//fisher-yates modern shuffle algorithm logic
+	private void shuffleArray(char[] c){
+		int index = c.length;
+		
+		while (--index > 0){
+			int randomIndex = random.nextInt(index+1);
+			swapValues(c,index,randomIndex);
+		}
+	}
+	
+	//helper function to swap values of an array based on 2 indexes
+	private void swapValues(char[] c, int i, int j){
+		char temp = c[i];
+		c[i] = c[j];
+		c[j] = temp;
 	}
 }
