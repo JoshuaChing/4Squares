@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jchingdev.squares.MainActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+    
+     <View
+        android:id="@+id/vAnchor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"/>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+       
+    <Button
+        android:id="@+id/square1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/square3"/>
+    
+    <Button
+        android:id="@+id/square2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@+id/square1"
+        android:layout_above="@+id/square3" />
+    
+   <Button
+        android:id="@+id/square3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
+    
+    <Button
+        android:id="@+id/square4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@+id/square3"
+        android:layout_alignParentBottom="true" />
+    
+    </RelativeLayout>
+
+</RelativeLayout>
