@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	private Button square3;
 	private Button square4;
 	private TextView scoreView;
+	private Button answerButton;
 	
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
 	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
@@ -55,15 +56,18 @@ public class MainActivity extends Activity {
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
 		square4 = (Button)findViewById(R.id.square4);
+		answerButton = (Button)findViewById(R.id.answer);
 	    //calculate and set square dimensions
 	    squareSize = (dpWidth-80)/2.0;
-		setSquareSize(square1, (int)squareSize);
-		setSquareSize(square2, (int)squareSize);
-		setSquareSize(square3, (int)squareSize);
-		setSquareSize(square4, (int)squareSize);
+		setSquareSize(square1, (int)squareSize, (int)squareSize);
+		setSquareSize(square2, (int)squareSize, (int)squareSize);
+		setSquareSize(square3, (int)squareSize, (int)squareSize);
+		setSquareSize(square4, (int)squareSize, (int)squareSize);
+		setSquareSize(answerButton,(int)squareSize,32);
 		//game variables
 		random = new Random();
 		answer = random.nextInt(4);
+		setSquareColour(answer,answerButton);
 		score = 0;
 	}
 
@@ -89,13 +93,14 @@ public class MainActivity extends Activity {
 	}
 	
 	//set square dimensions (convert dp back to px)
-	private void setSquareSize(Button b, int i){
+	private void setSquareSize(Button b, int x, int y){
 		Resources r = getResources();
-		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, i, r.getDisplayMetrics());
+		float pxX = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, x, r.getDisplayMetrics());
+		float pxY = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, y, r.getDisplayMetrics());
 		android.view.ViewGroup.LayoutParams params = null;
 		params = b.getLayoutParams();
-		params.width=(int) px;
-		params.height=(int) px;
+		params.width=(int) pxX;
+		params.height=(int) pxY;
 		b.setLayoutParams(params);
 	}
 	
@@ -159,12 +164,9 @@ public class MainActivity extends Activity {
 		//if user gets the correct answer
 		if (squares[input] == answer){
 			
-			//set new score
-			score++;
-			scoreView.setText(String.valueOf(score));
-			
 			//set new answer
 			answer = random.nextInt(4);		//new answer
+			setSquareColour(answer,answerButton);
 			
 			//change new colours of squares
 			shuffleArray(squares);
@@ -172,6 +174,10 @@ public class MainActivity extends Activity {
 			setSquareColour(squares[1],square2);
 			setSquareColour(squares[2],square3);
 			setSquareColour(squares[3],square4);
+			
+			//set new score
+			score++;
+			scoreView.setText(String.valueOf(score));
 
 		}
 		else{

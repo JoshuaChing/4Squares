@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_centerVertical="true"/>
-    
+   
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
@@ -27,41 +27,70 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp">
+        
+     	<RelativeLayout
+        	android:layout_above="@+id/square1"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginBottom="60dp">  
+        
+        	<TextView
+            	android:id="@+id/gamePrompt"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="@string/gamePrompt"
+            	android:textColor="@color/cloud"
+            	android:textSize="14sp"
+            	android:layout_centerVertical="true"/>
+        
+        	<Button
+        		android:id="@+id/answer"
+        		android:layout_width="100dp"
+        		android:layout_height="40dp"
+        		android:background="@drawable/yellow_square"
+        		android:layout_toRightOf="@+id/gamePrompt"
+        		android:layout_marginLeft="10dp"
+        		android:onClick="answerClicked"/>
+          
+    	</RelativeLayout>
        
-    <Button
-        android:id="@+id/square1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_above="@+id/square3"
-        android:background="@drawable/red_square"
-        android:onClick="square1Clicked"/>
+    	<Button
+        	android:id="@+id/square1"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_above="@+id/square3"
+        	android:background="@drawable/red_square"
+        	android:onClick="square1Clicked"
+        	android:layout_marginLeft="20dp"/>
     
-    <Button
-        android:id="@+id/square2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@+id/square1"
-        android:layout_above="@+id/square3"
-        android:background="@drawable/yellow_square"
-        android:onClick="square2Clicked"/>
+    	<Button
+        	android:id="@+id/square2"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square1"
+        	android:layout_above="@+id/square3"
+        	android:background="@drawable/yellow_square"
+        	android:onClick="square2Clicked"/>
     
-   <Button
-        android:id="@+id/square3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/green_square"
-        android:onClick="square3Clicked"/>
+   		<Button
+        	android:id="@+id/square3"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentBottom="true"
+       		android:background="@drawable/green_square"
+        	android:onClick="square3Clicked"
+        	android:layout_marginLeft="20dp"/>
     
-    <Button
-        android:id="@+id/square4"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@+id/square3"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/blue_square"
-        android:onClick="square4Clicked"/>
+    	<Button
+        	android:id="@+id/square4"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square3"
+        	android:layout_alignParentBottom="true"
+        	android:background="@drawable/blue_square"
+        	android:onClick="square4Clicked"/>
     
-    </RelativeLayout>
+   	</RelativeLayout>
 
 </RelativeLayout>
