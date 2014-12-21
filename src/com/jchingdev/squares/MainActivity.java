@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 		setSquareSize(square2, (int)squareSize, (int)squareSize);
 		setSquareSize(square3, (int)squareSize, (int)squareSize);
 		setSquareSize(square4, (int)squareSize, (int)squareSize);
-		setSquareSize(answerButton,(int)squareSize,32);
+		setSquareSize(answerButton,(int)squareSize*2,(int)squareSize/2);
 		//game variables
 		random = new Random();
 		answer = random.nextInt(4);

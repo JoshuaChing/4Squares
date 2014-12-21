@@ -28,41 +28,26 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp">
         
-     	<RelativeLayout
+        <Button
+        	android:id="@+id/answer"
+        	android:layout_width="100dp"
+        	android:layout_height="40dp"
+        	android:background="@drawable/yellow_square"
+        	android:text="@string/gamePrompt"
+        	android:textColor="@color/cloud"
+        	android:textStyle="bold"
+        	android:onClick="answerClicked"
+        	android:textSize="18sp"
         	android:layout_above="@+id/square1"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_centerHorizontal="true"
-        	android:layout_marginBottom="60dp">  
-        
-        	<TextView
-            	android:id="@+id/gamePrompt"
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-            	android:text="@string/gamePrompt"
-            	android:textColor="@color/cloud"
-            	android:textSize="14sp"
-            	android:layout_centerVertical="true"/>
-        
-        	<Button
-        		android:id="@+id/answer"
-        		android:layout_width="100dp"
-        		android:layout_height="40dp"
-        		android:background="@drawable/yellow_square"
-        		android:layout_toRightOf="@+id/gamePrompt"
-        		android:layout_marginLeft="10dp"
-        		android:onClick="answerClicked"/>
-          
-    	</RelativeLayout>
-       
+        	android:layout_marginBottom="60dp"/>
+        		
     	<Button
         	android:id="@+id/square1"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
         	android:layout_above="@+id/square3"
         	android:background="@drawable/red_square"
-        	android:onClick="square1Clicked"
-        	android:layout_marginLeft="20dp"/>
+        	android:onClick="square1Clicked"/>
     
     	<Button
         	android:id="@+id/square2"
@@ -79,8 +64,7 @@
         	android:layout_height="50dp"
         	android:layout_alignParentBottom="true"
        		android:background="@drawable/green_square"
-        	android:onClick="square3Clicked"
-        	android:layout_marginLeft="20dp"/>
+        	android:onClick="square3Clicked"/>
     
     	<Button
         	android:id="@+id/square4"
