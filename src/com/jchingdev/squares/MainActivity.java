@@ -38,6 +38,8 @@ public class MainActivity extends Activity {
 	private TextView preGameTimerView;
 	private Button answerButton;
 	private RelativeLayout gameOverView;
+	private TextView endScoreView;
+	private TextView bestScoreView;
 	
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
 	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
@@ -60,6 +62,8 @@ public class MainActivity extends Activity {
 	    //find game views
 	    scoreView = (TextView)findViewById(R.id.score);
 	    timerView = (TextView)findViewById(R.id.timer);
+	    endScoreView = (TextView)findViewById(R.id.endScore);
+	    bestScoreView = (TextView)findViewById(R.id.bestScore);
 	    preGameTimerView = (TextView)findViewById(R.id.preGameTimer);
 	    square1 = (Button)findViewById(R.id.square1);
 		square2 = (Button)findViewById(R.id.square2);
@@ -241,12 +245,13 @@ public class MainActivity extends Activity {
 	
 	//function called when game is over
 	private void gameOver(){
-		gameOverView.setVisibility(View.VISIBLE);
 		square1.setEnabled(false);
 		square2.setEnabled(false);
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		answerButton.setEnabled(false);
+		endScoreView.setText("Score: "+String.valueOf(score));
+		gameOverView.setVisibility(View.VISIBLE);
 	}
 	
 	//retry button clicked
