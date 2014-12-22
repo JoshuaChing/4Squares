@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 	private Button square4;
 	private TextView scoreView;
 	private TextView timerView;
+	private TextView preGameTimerView;
 	private Button answerButton;
 	private RelativeLayout gameOverView;
 	
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
 	    //find game views
 	    scoreView = (TextView)findViewById(R.id.score);
 	    timerView = (TextView)findViewById(R.id.timer);
+	    preGameTimerView = (TextView)findViewById(R.id.preGameTimer);
 	    square1 = (Button)findViewById(R.id.square1);
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
@@ -72,12 +74,17 @@ public class MainActivity extends Activity {
 		setSquareSize(square3, (int)squareSize, (int)squareSize);
 		setSquareSize(square4, (int)squareSize, (int)squareSize);
 		setSquareSize(answerButton,(int)squareSize*2,(int)squareSize/2);
+		//disable buttons
+		square1.setEnabled(false);
+		square2.setEnabled(false);
+		square3.setEnabled(false);
+		square4.setEnabled(false);
 		//game variables
 		random = new Random();
 		answer = random.nextInt(4);
 		setSquareColour(answer,answerButton);
 		score = 0;
-		startTimer();
+		startPreGameTimer();
 	}
 
 	@Override
@@ -213,6 +220,25 @@ public class MainActivity extends Activity {
 		  }.start();
 	}
 	
+	//start pre game timer object
+	private void startPreGameTimer(){
+		timer = new CountDownTimer(3000, 100) {
+		     public void onTick(long millisUntilFinished) {
+		         preGameTimerView.setText(String.valueOf((int)Math.ceil((millisUntilFinished/1000.0))));
+		     }
+
+		     public void onFinish() {
+		    	 preGameTimerView.setText("0");
+		    	 square1.setEnabled(true);
+		 		 square2.setEnabled(true);
+		 		 square3.setEnabled(true);
+		 		 square4.setEnabled(true);
+		    	 preGameTimerView.setVisibility(View.GONE);
+		    	 startTimer();
+		     }
+		  }.start();
+	}
+	
 	//function called when game is over
 	private void gameOver(){
 		gameOverView.setVisibility(View.VISIBLE);
@@ -221,6 +247,34 @@ public class MainActivity extends Activity {
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		answerButton.setEnabled(false);
+	}
+	
+	//retry button clicked
+	public void retryClicked(View view){
+		//get new answer
+		answer = random.nextInt(4);
+		setSquareColour(answer,answerButton);
+		//score and time views reset
+		score = 0;
+		timerView.setText("30.00");
+		scoreView.setText("0");
+		//reset squares
+		for (int i = 0; i < 4; i++){
+			squares[i] = i;
+		}
+		setSquareColour(squares[0],square1);
+		setSquareColour(squares[1],square2);
+		setSquareColour(squares[2],square3);
+		setSquareColour(squares[3],square4);
+		//show proper views and start pre game timer
+		gameOverView.setVisibility(View.GONE);
+		preGameTimerView.setVisibility(View.VISIBLE);
+		startPreGameTimer();
+	}
+	
+	//main menu button clicked
+	public void menuClicked(View view){
+		finish();
 	}
 	
 }

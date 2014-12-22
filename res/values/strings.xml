@@ -8,10 +8,11 @@
     <string name="defaultTimer">30.00</string>
     <string name="gamePrompt">What color is this?</string>
     <string name="gameOver">Game Over</string>
-    <string name="bestScore">Best: 10</string>
-    <string name="endScore">Score: 5</string>
+    <string name="bestScore">Best: 0</string>
+    <string name="endScore">Score: 0</string>
     <string name="retry">Retry</string>
     <string name="menu">Menu</string>
+    <string name="defaultPreGameTimer">5</string>
     
     <color name="navy">#2c3e50</color>
     <color name="red">#e64c3c</color>

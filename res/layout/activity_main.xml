@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navy"
+    android:animateLayoutChanges="true"
     tools:context="com.jchingdev.squares.MainActivity" >
-    
+     
     <!-- GAMEPLAY -->
     
     <View
@@ -52,7 +53,8 @@
         	android:onClick="answerClicked"
         	android:textSize="18sp"
         	android:layout_above="@+id/square1"
-        	android:layout_marginBottom="60dp"/>
+        	android:layout_marginBottom="60dp"
+        	android:enabled="false"/>
         		
     	<Button
         	android:id="@+id/square1"
@@ -90,6 +92,17 @@
     
    	</RelativeLayout>
    	
+     <!-- PRE GAMEPLAY -->
+    <TextView
+        android:id="@+id/preGameTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultPreGameTimer"
+        android:textColor="@color/cloud"
+        android:textSize="100sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+    
     <!-- GAME OVER -->
     <RelativeLayout
         android:id="@+id/gameOverView"
@@ -150,7 +163,8 @@
         			android:layout_height="wrap_content"
         			android:layout_centerHorizontal="true"
         			android:layout_below="@+id/endScore">
-        			<Button 
+        			<Button
+        			    style="?android:attr/buttonBarButtonStyle" 
         				android:layout_width="0dp"
         				android:layout_height="wrap_content"
         				android:text="@string/retry"
@@ -160,8 +174,10 @@
         				android:paddingBottom="10dp"
         				android:background="@drawable/gray_button"
         				android:textColor="@color/cloud"
-        				android:layout_weight="1"/>
-        			<Button 
+        				android:layout_weight="1"
+        				android:onClick="retryClicked"/>
+        			<Button
+        			    style="?android:attr/buttonBarButtonStyle"
         				android:id="@+id/nextButton"
         				android:layout_width="0dp"
         				android:layout_height="wrap_content"
@@ -172,7 +188,8 @@
         				android:paddingBottom="10dp"
         				android:background="@drawable/gray_button"
         				android:textColor="@color/cloud"
-        				android:layout_weight="1"/>       
+        				android:layout_weight="1"
+        				android:onClick="menuClicked"/>       
     			</LinearLayout>
         	    
         	</RelativeLayout>
