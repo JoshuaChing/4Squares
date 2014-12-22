@@ -186,6 +186,86 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	//TOP LEFT set square colour
+	public void setSquareColourTL(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.tl_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.tl_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.tl_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.tl_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.tl_red);
+		}
+	}
+	
+	//TOP RIGHT set square colour
+	public void setSquareColourTR(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.tr_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.tr_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.tr_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.tr_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.tr_red);
+		}
+	}
+	
+	//BOTTOM LEFT set square colour
+	public void setSquareColourBL(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.bl_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.bl_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.bl_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.bl_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.bl_red);
+		}
+	}
+	
+	//BOTTOM RIGHT set square colour
+	public void setSquareColourBR(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.br_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.br_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.br_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.br_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.br_red);
+		}
+	}	
+		
 	//called when square is clicked
 	//where answer is the correct answer for the current round
 	//where input is the square the user clicked
@@ -200,10 +280,10 @@ public class MainActivity extends Activity {
 			
 			//change new colours of squares
 			shuffleArray(squares);
-			setSquareColour(squares[0],square1);
-			setSquareColour(squares[1],square2);
-			setSquareColour(squares[2],square3);
-			setSquareColour(squares[3],square4);
+			setSquareColourTL(squares[0],square1);
+			setSquareColourTR(squares[1],square2);
+			setSquareColourBL(squares[2],square3);
+			setSquareColourBR(squares[3],square4);
 			
 			//set new score
 			score++;
@@ -280,10 +360,10 @@ public class MainActivity extends Activity {
 		for (int i = 0; i < 4; i++){
 			squares[i] = i;
 		}
-		setSquareColour(squares[0],square1);
-		setSquareColour(squares[1],square2);
-		setSquareColour(squares[2],square3);
-		setSquareColour(squares[3],square4);
+		setSquareColourTL(squares[0],square1);
+		setSquareColourTR(squares[1],square2);
+		setSquareColourBL(squares[2],square3);
+		setSquareColourBR(squares[3],square4);
 		//show proper views and start pre game timer
 		gameOverView.setVisibility(View.GONE);
 		preGameTimerView.setVisibility(View.VISIBLE);

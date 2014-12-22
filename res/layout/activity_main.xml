@@ -61,7 +61,7 @@
         	android:layout_width="50dp"
         	android:layout_height="50dp"
         	android:layout_above="@+id/square3"
-        	android:background="@drawable/red_square"
+        	android:background="@drawable/tl_red"
         	android:onClick="square1Clicked"/>
     
     	<Button
@@ -70,7 +70,7 @@
         	android:layout_height="50dp"
         	android:layout_toRightOf="@+id/square1"
         	android:layout_above="@+id/square3"
-        	android:background="@drawable/yellow_square"
+        	android:background="@drawable/tr_yellow"
         	android:onClick="square2Clicked"/>
     
    		<Button
@@ -78,7 +78,7 @@
         	android:layout_width="50dp"
         	android:layout_height="50dp"
         	android:layout_alignParentBottom="true"
-       		android:background="@drawable/green_square"
+       		android:background="@drawable/bl_green"
         	android:onClick="square3Clicked"/>
     
     	<Button
@@ -87,7 +87,7 @@
         	android:layout_height="50dp"
         	android:layout_toRightOf="@+id/square3"
         	android:layout_alignParentBottom="true"
-        	android:background="@drawable/blue_square"
+        	android:background="@drawable/br_blue"
         	android:onClick="square4Clicked"/>
     
    	</RelativeLayout>

@@ -4,9 +4,6 @@
         <shape>
             <solid android:color="@color/blue_press"/>
             <corners
-	    		android:bottomRightRadius="5dp"
-	    		android:bottomLeftRadius="5dp"
-	    		android:topLeftRadius="5dp"
 	    		android:topRightRadius="5dp"/>
 		</shape>
     </item>
@@ -14,9 +11,6 @@
         <shape>
             <solid android:color="@color/blue_press"/>
             <corners
-	    		android:bottomRightRadius="5dp"
-	    		android:bottomLeftRadius="5dp"
-	    		android:topLeftRadius="5dp"
 	    		android:topRightRadius="5dp"/>
         </shape>
     </item>
@@ -24,9 +18,6 @@
 	    <shape>
 	    	<solid android:color="@color/blue" />
 	    	<corners
-	    		android:bottomRightRadius="5dp"
-	    		android:bottomLeftRadius="5dp"
-	    		android:topLeftRadius="5dp"
 	    		android:topRightRadius="5dp"/>
 	    </shape>
 	</item>
