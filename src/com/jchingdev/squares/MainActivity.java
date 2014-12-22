@@ -250,7 +250,7 @@ public class MainActivity extends Activity {
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		answerButton.setEnabled(false);
-		endScoreView.setText("Score: "+String.valueOf(score));
+		endScoreView.setText("SCORE: "+String.valueOf(score));
 		gameOverView.setVisibility(View.VISIBLE);
 	}
 	

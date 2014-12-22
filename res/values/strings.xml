@@ -8,16 +8,18 @@
     <!-- GAME -->
     <string name="defaultScore">0</string>
     <string name="defaultTimer">30.00</string>
-    <string name="gamePrompt">What color is this?</string>
+    <string name="gamePrompt">WHAT COLOR IS THIS?</string>
     <string name="gameOver">Game Over</string>
-    <string name="bestScore">Best: 0</string>
-    <string name="endScore">Score: 0</string>
-    <string name="retry">Retry</string>
-    <string name="menu">Menu</string>
+    <string name="bestScore">BEST: 0</string>
+    <string name="endScore">SCORE: 0</string>
+    <string name="retry">RETRY</string>
+    <string name="menu">MENU</string>
     <string name="defaultPreGameTimer">3</string>
 
     <!-- MENU -->
-    <string name="play">Play</string>
+    <string name="title">4 SQUARES</string>
+    <string name="play">PLAY</string>
+    <string name="copyright">© JOSHUA CHING 2014</string>
     
     <!-- COLOR -->
     <color name="navy">#2c3e50</color>
