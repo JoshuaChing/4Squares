@@ -15,7 +15,9 @@
         android:textStyle="bold"
         android:textSize="40sp"
         android:layout_above="@+id/play"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="40dp"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:drawablePadding="5dp"/>
     
     <Button
         android:id="@+id/play"
