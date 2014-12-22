@@ -6,6 +6,7 @@ import java.util.Random;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
@@ -47,6 +48,9 @@ public class MainActivity extends Activity {
 	private int answer;
 	private int score;
 	private CountDownTimer timer;
+	private SharedPreferences storage;
+	private SharedPreferences.Editor storageEdit;
+	private int bestScore;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,8 @@ public class MainActivity extends Activity {
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		//game variables
+		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
+		storageEdit= storage.edit();
 		random = new Random();
 		answer = random.nextInt(4);
 		setSquareColour(answer,answerButton);
@@ -250,6 +256,13 @@ public class MainActivity extends Activity {
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		answerButton.setEnabled(false);
+		bestScore = storage.getInt("bestScore",0);
+		if (score > bestScore){
+			bestScore = score;
+			storageEdit.putInt("bestScore",bestScore);
+			storageEdit.commit();
+		}
+		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
 		endScoreView.setText("SCORE: "+String.valueOf(score));
 		gameOverView.setVisibility(View.VISIBLE);
 	}
