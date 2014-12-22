@@ -24,6 +24,7 @@ public class MainMenu extends Activity{
 	public void playClicked(View view){
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 	
 }

@@ -280,6 +280,12 @@ public class MainActivity extends Activity {
 	//main menu button clicked
 	public void menuClicked(View view){
 		finish();
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 	
+	@Override
+	public void onBackPressed() {
+		finish();
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+	}
 }
