@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 	private int bestScore;
 	private MediaPlayer clickSound;
 	private MediaPlayer wrongSound;
+	private boolean volume;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,7 @@ public class MainActivity extends Activity {
 		//game variables
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
 		storageEdit= storage.edit();
+		volume = storage.getBoolean("volume", true);
 		random = new Random();
 		answer = random.nextInt(4);
 		setSquareColour(answer,answerButton);
@@ -285,7 +287,7 @@ public class MainActivity extends Activity {
 	private void checkAnswer(int input){
 		//if user gets the correct answer
 		if (squares[input] == answer){
-	        clickSound.start();
+	        playClickSound();
 			
 			//set new answer
 			answer = random.nextInt(4);		//new answer
@@ -304,7 +306,7 @@ public class MainActivity extends Activity {
 
 		}
 		else{
-	        wrongSound.start();
+	        playWrongSound();
 			
 			timer.cancel();
 			gameOver();
@@ -364,7 +366,7 @@ public class MainActivity extends Activity {
 	
 	//retry button clicked
 	public void retryClicked(View view){
-		clickSound.start();
+		playClickSound();
 		//get new answer
 		answer = random.nextInt(4);
 		setSquareColour(answer,answerButton);
@@ -388,16 +390,32 @@ public class MainActivity extends Activity {
 	
 	//main menu button clicked
 	public void menuClicked(View view){
-		clickSound.start();
+		playClickSound();
 		finish();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 	
+	//back button pressed
 	@Override
 	public void onBackPressed() {
 		finish();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
+	
+	//play click sound
+	private void playClickSound(){
+		if (volume){
+			clickSound.start();
+		}
+	}
+	
+	//play wrong sound
+	private void playWrongSound(){
+		if (volume){
+			wrongSound.start();
+		}
+	}
+	
 	
 	/*AD MOB FRAGMENT*/
 	public static class AdFragment extends Fragment {
