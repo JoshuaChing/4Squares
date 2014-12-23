@@ -32,7 +32,8 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:padding="15dp"
-        android:onClick="playClicked"/> 
+        android:onClick="playClicked"
+        android:soundEffectsEnabled="false"/> 
         
    		<TextView
         	android:id="@+id/bestScore"

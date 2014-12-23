@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -57,6 +58,8 @@ public class MainActivity extends Activity {
 	private SharedPreferences storage;
 	private SharedPreferences.Editor storageEdit;
 	private int bestScore;
+	private MediaPlayer clickSound;
+	private MediaPlayer wrongSound;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,9 @@ public class MainActivity extends Activity {
 		square2.setEnabled(false);
 		square3.setEnabled(false);
 		square4.setEnabled(false);
+		//set up sounds
+		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
+		wrongSound = MediaPlayer.create(getBaseContext(), R.raw.wrong);
 		//game variables
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
 		storageEdit= storage.edit();
@@ -279,6 +285,7 @@ public class MainActivity extends Activity {
 	private void checkAnswer(int input){
 		//if user gets the correct answer
 		if (squares[input] == answer){
+	        clickSound.start();
 			
 			//set new answer
 			answer = random.nextInt(4);		//new answer
@@ -297,6 +304,8 @@ public class MainActivity extends Activity {
 
 		}
 		else{
+	        wrongSound.start();
+			
 			timer.cancel();
 			gameOver();
 		}
@@ -355,6 +364,7 @@ public class MainActivity extends Activity {
 	
 	//retry button clicked
 	public void retryClicked(View view){
+		clickSound.start();
 		//get new answer
 		answer = random.nextInt(4);
 		setSquareColour(answer,answerButton);
@@ -378,6 +388,7 @@ public class MainActivity extends Activity {
 	
 	//main menu button clicked
 	public void menuClicked(View view){
+		clickSound.start();
 		finish();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,11 +20,13 @@ public class MainMenu extends Activity{
 	private SharedPreferences storage;
 	private int bestScore;
 	private TextView bestScoreView;
+	private MediaPlayer clickSound;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
+		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
 		bestScoreView = (TextView)findViewById(R.id.bestScore);
 		displayBestScore();
@@ -50,6 +53,7 @@ public class MainMenu extends Activity{
 	
 	//play button clicked
 	public void playClicked(View view){
+		clickSound.start();
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);

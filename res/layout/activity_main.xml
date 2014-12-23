@@ -187,7 +187,8 @@
         				android:background="@drawable/gray_button"
         				android:textColor="@color/cloud"
         				android:layout_weight="1"
-        				android:onClick="retryClicked"/>
+        				android:onClick="retryClicked"
+        				android:soundEffectsEnabled="false"/>
         			<Button
         			    style="?android:attr/buttonBarButtonStyle"
         				android:id="@+id/nextButton"
@@ -201,7 +202,8 @@
         				android:background="@drawable/gray_button"
         				android:textColor="@color/cloud"
         				android:layout_weight="1"
-        				android:onClick="menuClicked"/>       
+        				android:onClick="menuClicked"
+        				android:soundEffectsEnabled="false"/>       
     			</LinearLayout>
         	    
         	</RelativeLayout>
