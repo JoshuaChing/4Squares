@@ -13,14 +13,17 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainMenu extends Activity{
 
 	private SharedPreferences storage;
+	private SharedPreferences.Editor storageEdit;
 	private int bestScore;
 	private TextView bestScoreView;
 	private MediaPlayer clickSound;
+	private ImageButton volumeButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,11 @@ public class MainMenu extends Activity{
 		setContentView(R.layout.activity_main_menu);
 		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
+		storageEdit= storage.edit();
 		bestScoreView = (TextView)findViewById(R.id.bestScore);
+		volumeButton = (ImageButton)findViewById(R.id.volume);
 		displayBestScore();
+		displayVolumeImage();
 	}
 	
 	@Override
@@ -53,7 +59,9 @@ public class MainMenu extends Activity{
 	
 	//play button clicked
 	public void playClicked(View view){
-		clickSound.start();
+		if (storage.getBoolean("volume",true)){
+			clickSound.start();
+		}
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -63,6 +71,29 @@ public class MainMenu extends Activity{
 	private void displayBestScore(){
 		bestScore = storage.getInt("bestScore", 0);
 		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
+	}
+	
+	//display correct volume button image
+	private void displayVolumeImage(){
+		if (storage.getBoolean("volume",true)){
+			volumeButton.setImageResource(R.drawable.ic_action_volume_on);
+		}else{
+			volumeButton.setImageResource(R.drawable.ic_action_volume_muted);
+		}
+	}
+	
+	//volume button clicked
+	public void volumeClicked(View view){
+		//if volume settings is on
+		if (storage.getBoolean("volume",true)){
+			storageEdit.putBoolean("volume",false);
+			volumeButton.setImageResource(R.drawable.ic_action_volume_muted);
+		}else{
+			storageEdit.putBoolean("volume",true);
+			clickSound.start();
+			volumeButton.setImageResource(R.drawable.ic_action_volume_on);
+		}
+		storageEdit.commit();
 	}
 	
 	/*AD MOB FRAGMENT*/

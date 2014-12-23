@@ -57,6 +57,19 @@
         android:textSize="12sp"
         android:layout_marginBottom="20dp">
     </TextView>
+    
+    <ImageButton
+        android:contentDescription="@string/volumeCD"
+	    android:id="@+id/volume"
+	    android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/ic_action_volume_on"
+    	android:layout_alignParentBottom="true"
+    	android:layout_alignParentRight="true"
+    	android:padding="10dp"
+    	android:background="@color/transparent"
+    	android:onClick="volumeClicked"
+    	android:soundEffectsEnabled="false"/>
 
     <!-- ADMOB -->
     <fragment

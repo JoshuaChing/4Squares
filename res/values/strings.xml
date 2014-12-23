@@ -20,6 +20,7 @@
     <string name="title">4 SQUARES</string>
     <string name="play">PLAY</string>
     <string name="copyright">© JOSHUA CHING 2014</string>
+    <string name="volumeCD">volume</string>
     
     <!-- COLOR -->
     <color name="navy">#2c3e50</color>
@@ -36,6 +37,7 @@
     <color name="gray">#95a5a6</color>
     <color name="gray_press">#7f8c8d</color>
     <color name="black_trans50">#80000000</color>
+    <color name="transparent">#00000000</color>
     
     <!-- ADMOB -->
 	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
