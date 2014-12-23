@@ -114,6 +114,14 @@
         android:layout_height="match_parent"
         android:background="@color/black_trans50"
         android:visibility="gone">
+        	
+       	<!-- ADMOB -->
+    	<fragment
+        	android:id="@+id/adFragment"
+        	android:name="com.jchingdev.squares.MainMenu$AdFragment"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true" />
         
         	<RelativeLayout
         	    android:layout_width="match_parent"

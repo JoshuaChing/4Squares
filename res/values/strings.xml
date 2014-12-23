@@ -36,5 +36,8 @@
     <color name="gray">#95a5a6</color>
     <color name="gray_press">#7f8c8d</color>
     <color name="black_trans50">#80000000</color>
+    
+    <!-- ADMOB -->
+	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
 </resources>
