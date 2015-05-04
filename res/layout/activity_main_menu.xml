@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navy"
-    tools:context="com.jchingdev.squares.MainMenu">
+    tools:context="com.jchingdev.squares.MainMenu"
+    tools:ignore="HardcodedText" >
     
     <TextView
         android:id="@+id/title"
@@ -23,7 +24,10 @@
         android:id="@+id/play"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_margin="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/play"
@@ -33,11 +37,30 @@
         android:textSize="18sp"
         android:padding="15dp"
         android:onClick="playClicked"
+        android:soundEffectsEnabled="false"/>
+    
+    <Button
+        android:id="@+id/leaderboards"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/leaderboards"
+        android:background="@drawable/gray_button"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:layout_below="@+id/play"
         android:soundEffectsEnabled="false"/> 
         
    		<TextView
         	android:id="@+id/bestScore"
-        	android:layout_below="@+id/play"
+        	android:layout_below="@+id/leaderboards"
         	android:layout_width="wrap_content"
       		android:layout_height="wrap_content"
         	android:text="@string/bestScore"
@@ -49,6 +72,7 @@
         	    
     
     <TextView
+        android:id="@+id/copyright"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,6 +95,7 @@
     	android:onClick="volumeClicked"
     	android:soundEffectsEnabled="false"/>
 
+    
     <!-- ADMOB -->
     <fragment
         android:id="@+id/adFragment"
@@ -78,5 +103,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
+    
+    
+    <!-- GOOGLE PLAY SERVICES-->
+    <!-- sign-in button -->
+ 
+	<com.google.android.gms.common.SignInButton
+ 		android:id="@+id/sign_in_button"
+ 		android:layout_width="wrap_content"
+ 		android:layout_height="wrap_content"
+ 		
+ 		android:layout_above="@+id/copyright"
+ 		android:layout_centerHorizontal="true"
+ 		android:layout_marginBottom="20dp" />
+ 
+	<!-- sign-out button -->
+ 
+	<Button
+ 		android:id="@+id/sign_out_button"
+ 		android:layout_width="wrap_content"
+ 		android:layout_height="wrap_content"
+ 		android:text="Sign Out"
+ 		android:visibility="gone"
+ 		
+ 		android:layout_above="@+id/copyright"
+ 		android:layout_centerHorizontal="true"
+ 		android:layout_marginBottom="20dp" />
     
 </RelativeLayout>

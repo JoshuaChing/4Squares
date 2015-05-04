@@ -19,6 +19,7 @@
     <!-- MENU -->
     <string name="title">4 SQUARES</string>
     <string name="play">PLAY</string>
+    <string name="leaderboards">LEADERBOARDS</string>
     <string name="copyright">© JOSHUA CHING 2014</string>
     <string name="volumeCD">volume</string>
     
@@ -41,5 +42,9 @@
     
     <!-- ADMOB -->
 	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+	
+	<!-- GOOGLE PLAY SERVICES -->
+	<string name="app_id"></string>
+	<string name="classic_leaderboard"></string>
 
 </resources>

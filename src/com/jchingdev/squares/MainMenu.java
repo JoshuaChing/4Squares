@@ -2,9 +2,11 @@ package com.jchingdev.squares;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.games.Games;
 
-import android.app.Activity;
-import android.app.Fragment;
+import com.google.example.games.basegameutils.BaseGameActivity;
+
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -16,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MainMenu extends Activity{
+public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 
 	private SharedPreferences storage;
 	private SharedPreferences.Editor storageEdit;
@@ -36,6 +38,10 @@ public class MainMenu extends Activity{
 		volumeButton = (ImageButton)findViewById(R.id.volume);
 		displayBestScore();
 		displayVolumeImage();
+		//google play service buttons
+		findViewById(R.id.sign_in_button).setOnClickListener(this);
+		findViewById(R.id.sign_out_button).setOnClickListener(this);
+		findViewById(R.id.leaderboards).setOnClickListener(this);
 	}
 	
 	@Override
@@ -157,4 +163,34 @@ public class MainMenu extends Activity{
         }
 
     }
+	
+	/*GOOGLE PLAY SERVICE (BASEGAMEACTIVITY)*/
+	
+	@Override
+	public void onSignInFailed() {
+		findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+	    findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+	    findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	public void onClick(View view) {
+		if (view.getId() == R.id.sign_in_button) { //sign in google+
+	        beginUserInitiatedSignIn();
+	    }
+	    else if (view.getId() == R.id.sign_out_button) { //sign out google+
+	        signOut();
+	        findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+	        findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+	    }
+	    else if (view.getId() == R.id.leaderboards){ //leaderboards
+	    	startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
+	    			getString(R.string.classic_leaderboard)), 1);
+	    }
+	}
 }

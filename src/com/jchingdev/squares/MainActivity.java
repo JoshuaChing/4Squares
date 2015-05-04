@@ -6,9 +6,11 @@ import java.util.Random;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.BaseGameActivity;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -29,7 +31,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseGameActivity {
 	
 	//dimension variables
 	private float density;
@@ -362,6 +364,10 @@ public class MainActivity extends Activity {
 		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
 		endScoreView.setText("SCORE: "+String.valueOf(score));
 		gameOverView.setVisibility(View.VISIBLE);
+		//submit score to google play service
+		if(getApiClient().isConnected()){
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.classic_leaderboard), score);
+		}
 	}
 	
 	//retry button clicked
@@ -478,5 +484,13 @@ public class MainActivity extends Activity {
         }
 
     }
+	
+	/*GOOGLE PLAY SERVICE (BASEGAMEACTIVITY)*/
+
+	@Override
+	public void onSignInFailed() {}
+
+	@Override
+	public void onSignInSucceeded(){}
 	
 }
