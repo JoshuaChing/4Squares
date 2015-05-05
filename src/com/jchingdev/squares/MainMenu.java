@@ -7,6 +7,8 @@ import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameActivity;
 
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -188,9 +190,22 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	        findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
 	        findViewById(R.id.sign_out_button).setVisibility(View.GONE);
 	    }
-	    else if (view.getId() == R.id.leaderboards){ //leaderboards
+	    else if (view.getId() == R.id.leaderboards){ //leaderboards if logged in
+	    	if(getApiClient().isConnected()){
 	    	startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
 	    			getString(R.string.classic_leaderboard)), 1);
+	    	}else{
+	    		new AlertDialog.Builder(this)
+				.setTitle("Error")
+				.setMessage("Please sign into Google Play to access the leaderboards!")
+				.setIcon(R.drawable.ic_launcher)
+				.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog, int which){
+							//place alert dialog functions here
+						}
+				})
+				.show();
+	    	}
 	    }
 	}
 }

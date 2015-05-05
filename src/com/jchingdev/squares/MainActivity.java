@@ -48,6 +48,7 @@ public class MainActivity extends BaseGameActivity {
 	private TextView preGameTimerView;
 	private Button answerButton;
 	private RelativeLayout gameOverView;
+	private TextView leaderboardsMessage;
 	private TextView endScoreView;
 	private TextView bestScoreView;
 	
@@ -68,6 +69,7 @@ public class MainActivity extends BaseGameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		getGameHelper().setMaxAutoSignInAttempts(0);
 		//get display dimensions in dp
 		WindowManager wm = ((WindowManager)this.getSystemService(Context.WINDOW_SERVICE));
 	    Display display = wm.getDefaultDisplay();
@@ -87,6 +89,7 @@ public class MainActivity extends BaseGameActivity {
 		square4 = (Button)findViewById(R.id.square4);
 		answerButton = (Button)findViewById(R.id.answer);
 		gameOverView = (RelativeLayout)findViewById(R.id.gameOverView);
+		leaderboardsMessage = (TextView)findViewById(R.id.leaderboards_message);
 	    //calculate and set square dimensions
 	    squareSize = (dpWidth-80)/2.0;
 		setSquareSize(square1, (int)squareSize, (int)squareSize);
@@ -366,7 +369,10 @@ public class MainActivity extends BaseGameActivity {
 		gameOverView.setVisibility(View.VISIBLE);
 		//submit score to google play service
 		if(getApiClient().isConnected()){
+			leaderboardsMessage.setVisibility(View.GONE);
 			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.classic_leaderboard), score);
+		}else{
+			leaderboardsMessage.setVisibility(View.VISIBLE);
 		}
 	}
 	

@@ -15,16 +15,21 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="40sp"
-        android:layout_above="@+id/play"
-        android:layout_marginBottom="40dp"
+        android:layout_above="@+id/buttons_layout"
         android:drawableLeft="@drawable/ic_launcher"
         android:drawablePadding="5dp"/>
     
-    <Button
-        android:id="@+id/play"
+   <RelativeLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp">
+    
+    <Button
+        android:id="@+id/play"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="10dp"
@@ -41,12 +46,10 @@
     
     <Button
         android:id="@+id/leaderboards"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/play"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/leaderboards"
@@ -55,20 +58,21 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:padding="15dp"
-        android:layout_below="@+id/play"
-        android:soundEffectsEnabled="false"/> 
+        android:soundEffectsEnabled="false"/>
+    </RelativeLayout>
         
-   		<TextView
-        	android:id="@+id/bestScore"
-        	android:layout_below="@+id/leaderboards"
-        	android:layout_width="wrap_content"
-      		android:layout_height="wrap_content"
-        	android:text="@string/bestScore"
-        	android:textColor="@color/cloud"
-        	android:textStyle="bold"
-        	android:textSize="18sp"
-        	android:layout_centerHorizontal="true">
-        </TextView>
+   	<TextView
+       	android:id="@+id/bestScore"
+       	android:layout_above="@+id/copyright"
+       	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:layout_marginBottom="20dp"
+       	android:text="@string/bestScore"
+       	android:textColor="@color/cloud"
+       	android:textStyle="bold"
+       	android:textSize="18sp"
+       	android:layout_centerHorizontal="true">
+	</TextView>
         	    
     
     <TextView
@@ -104,7 +108,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
     
-    
     <!-- GOOGLE PLAY SERVICES-->
     <!-- sign-in button -->
  
@@ -113,9 +116,8 @@
  		android:layout_width="wrap_content"
  		android:layout_height="wrap_content"
  		
- 		android:layout_above="@+id/copyright"
- 		android:layout_centerHorizontal="true"
- 		android:layout_marginBottom="20dp" />
+ 		android:layout_below="@+id/buttons_layout"
+ 		android:layout_centerHorizontal="true"/>
  
 	<!-- sign-out button -->
  
@@ -126,8 +128,17 @@
  		android:text="Sign Out"
  		android:visibility="gone"
  		
- 		android:layout_above="@+id/copyright"
+ 		android:background="@drawable/red_button_signout"
+ 		android:layout_marginTop="4dp"
+ 		android:paddingTop="11dp"
+ 		android:paddingBottom="10dp"
+ 		android:paddingLeft="24dp"
+ 		android:paddingRight="25dp"
+ 		android:textColor="@color/cloud"
+ 		android:textStyle="bold"
+ 		android:textSize="13sp"
+ 		android:layout_below="@+id/buttons_layout"
  		android:layout_centerHorizontal="true"
- 		android:layout_marginBottom="20dp" />
+ 		android:gravity="center"/>
     
 </RelativeLayout>

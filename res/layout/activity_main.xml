@@ -171,6 +171,7 @@
         	    </TextView>
         	    
         	    <LinearLayout 
+        	        android:id="@+id/buttons_layout"
         			android:layout_width="match_parent"
         			android:layout_height="wrap_content"
         			android:layout_centerHorizontal="true"
@@ -205,6 +206,16 @@
         				android:onClick="menuClicked"
         				android:soundEffectsEnabled="false"/>       
     			</LinearLayout>
+    			
+        	    <TextView
+        	        android:id="@+id/leaderboards_message"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="@string/leaderboards_message"
+        	        android:textColor="@color/cloud"
+        	        android:layout_below="@+id/buttons_layout"
+        	        android:textSize="12sp"
+        	        android:layout_marginTop="20dp"/>
         	    
         	</RelativeLayout>
         
