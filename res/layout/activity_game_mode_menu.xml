@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navy"
+    tools:context="${relativePackage}.${activityClass}" >
+    
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gameModeTitle"
+        android:textColor="@color/cloud"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:layout_above="@+id/buttons_layout"
+        android:drawablePadding="5dp"/>
+    
+    <RelativeLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp">
+    
+    <Button
+        android:id="@+id/classic"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/classicMode"
+        android:background="@drawable/gray_button"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:onClick="classicClicked"
+        android:soundEffectsEnabled="false"/>
+    
+    <Button
+        android:id="@+id/challenge"
+        android:layout_below="@+id/classic"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/challengeMode"
+        android:background="@drawable/gray_button"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:onClick="challengeClicked"
+        android:soundEffectsEnabled="false"/>
+    
+    <Button
+        android:id="@+id/back"
+        android:layout_below="@+id/challenge"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:background="@drawable/gray_button"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:onClick="backClicked"
+        android:soundEffectsEnabled="false"/>
+    </RelativeLayout>
+    
+    <!-- ADMOB -->
+    <fragment
+        android:id="@+id/adFragment"
+        android:name="com.jchingdev.squares.MainMenu$AdFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+
+</RelativeLayout>

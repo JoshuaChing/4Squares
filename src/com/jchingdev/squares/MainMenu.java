@@ -70,7 +70,7 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 		if (storage.getBoolean("volume",true)){
 			clickSound.start();
 		}
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, GameModeMenu.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
@@ -191,6 +191,9 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	        findViewById(R.id.sign_out_button).setVisibility(View.GONE);
 	    }
 	    else if (view.getId() == R.id.leaderboards){ //leaderboards if logged in
+	    	if (storage.getBoolean("volume",true)){
+				clickSound.start();
+			}
 	    	if(getApiClient().isConnected()){
 	    	startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
 	    			getString(R.string.classic_leaderboard)), 1);

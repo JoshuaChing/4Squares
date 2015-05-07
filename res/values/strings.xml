@@ -23,6 +23,11 @@
     <string name="leaderboards">LEADERBOARDS</string>
     <string name="copyright">© JOSHUA CHING 2014</string>
     <string name="volumeCD">volume</string>
+    <string name="back">BACK</string>
+    
+    <string name="gameModeTitle">GAME MODES</string>
+    <string name="classicMode">CLASSIC 2x2</string>
+    <string name="challengeMode">CHALLENGE 3x3</string>
     
     <!-- COLOR -->
     <color name="navy">#2c3e50</color>

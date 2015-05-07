@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/navy"
     android:animateLayoutChanges="true"
-    tools:context="com.jchingdev.squares.MainActivity" >
+    tools:context="com.jchingdev.squares.MainActivity2" >
      
     <!-- GAMEPLAY -->
     
@@ -241,10 +241,10 @@
         				android:soundEffectsEnabled="false"/>
         			<Button
         			    style="?android:attr/buttonBarButtonStyle"
-        				android:id="@+id/nextButton"
+        				android:id="@+id/backButton"
         				android:layout_width="0dp"
         				android:layout_height="wrap_content"
-        				android:text="@string/menu"
+        				android:text="@string/back"
         				android:gravity="center"
         				android:layout_marginLeft="5dp"
         				android:paddingTop="10dp"

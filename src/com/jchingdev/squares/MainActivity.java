@@ -12,6 +12,7 @@ import com.google.example.games.basegameutils.BaseGameActivity;
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -403,14 +404,18 @@ public class MainActivity extends BaseGameActivity {
 	//main menu button clicked
 	public void menuClicked(View view){
 		playClickSound();
+		Intent intent = new Intent(this, GameModeMenu.class);
 		finish();
+		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 	
 	//back button pressed
 	@Override
 	public void onBackPressed() {
+		Intent intent = new Intent(this, GameModeMenu.class);
 		finish();
+		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 	
