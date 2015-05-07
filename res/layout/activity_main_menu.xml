@@ -59,21 +59,7 @@
         android:textSize="18sp"
         android:padding="15dp"
         android:soundEffectsEnabled="false"/>
-    </RelativeLayout>
-        
-   	<TextView
-       	android:id="@+id/bestScore"
-       	android:layout_above="@+id/copyright"
-       	android:layout_width="wrap_content"
-     	android:layout_height="wrap_content"
-     	android:layout_marginBottom="20dp"
-       	android:text="@string/bestScore"
-       	android:textColor="@color/cloud"
-       	android:textStyle="bold"
-       	android:textSize="18sp"
-       	android:layout_centerHorizontal="true">
-	</TextView>
-        	    
+    </RelativeLayout>    
     
     <TextView
         android:id="@+id/copyright"

@@ -18,14 +18,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 
 	private SharedPreferences storage;
 	private SharedPreferences.Editor storageEdit;
-	private int bestScore;
-	private TextView bestScoreView;
 	private MediaPlayer clickSound;
 	private ImageButton volumeButton;
 	
@@ -36,9 +33,7 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
 		storageEdit= storage.edit();
-		bestScoreView = (TextView)findViewById(R.id.bestScore);
 		volumeButton = (ImageButton)findViewById(R.id.volume);
-		displayBestScore();
 		displayVolumeImage();
 		//google play service buttons
 		findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -49,13 +44,11 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	@Override
 	public void onRestart(){
 		super.onRestart();
-		displayBestScore();
 	}
 	
 	@Override
 	public void onResume(){
 		super.onResume();
-		displayBestScore();
 	}
 
 	@Override
@@ -73,12 +66,6 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 		Intent intent = new Intent(this, GameModeMenu.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-	}
-	
-	//display best score
-	private void displayBestScore(){
-		bestScore = storage.getInt("bestScore", 0);
-		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
 	}
 	
 	//display correct volume button image
@@ -195,8 +182,7 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 				clickSound.start();
 			}
 	    	if(getApiClient().isConnected()){
-	    	startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getApiClient(),
-	    			getString(R.string.classic_leaderboard)), 1);
+	    		startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getApiClient()), 1);
 	    	}else{
 	    		new AlertDialog.Builder(this)
 				.setTitle("Error")

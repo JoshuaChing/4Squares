@@ -12,11 +12,14 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class GameModeMenu extends FragmentActivity {
 
 	private MediaPlayer clickSound;
 	private SharedPreferences storage;
+	private TextView bestScoreClassicView;
+	private TextView bestScoreChallengeView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,34 @@ public class GameModeMenu extends FragmentActivity {
 		setContentView(R.layout.activity_game_mode_menu);
 		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
+		bestScoreClassicView = (TextView)findViewById(R.id.bestScoreClassic);
+		bestScoreChallengeView = (TextView)findViewById(R.id.bestScoreChallenge);
+		displayBestScores();
+	}
+	
+	@Override
+	public void onRestart(){
+		super.onRestart();
+		displayBestScores();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		displayBestScores();
+	}
+	
+	//back button pressed
+	@Override
+	public void onBackPressed() {
+		finish();
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+	}
+	
+	//display best score for different game modes
+	public void displayBestScores(){
+		bestScoreClassicView.setText("BEST: "+String.valueOf(storage.getInt("bestScore", 0)));
+		bestScoreChallengeView.setText("BEST: "+String.valueOf(storage.getInt("bestScore3by3", 0)));
 	}
 	
 	//classic mode button pressed
@@ -53,13 +84,6 @@ public class GameModeMenu extends FragmentActivity {
 		if (storage.getBoolean("volume",true)){
 			clickSound.start();
 		}
-		finish();
-		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-	}
-	
-	//back button pressed
-	@Override
-	public void onBackPressed() {
 		finish();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}

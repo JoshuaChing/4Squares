@@ -534,12 +534,12 @@ public class MainActivity2 extends BaseGameActivity {
 		endScoreView.setText("SCORE: "+String.valueOf(score));
 		gameOverView.setVisibility(View.VISIBLE);
 		//submit score to google play service
-		/*if(getApiClient().isConnected()){
+		if(getApiClient().isConnected()){
 			leaderboardsMessage.setVisibility(View.GONE);
-			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.classic_leaderboard), score);
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.challenge_leaderboard), score);
 		}else{
 			leaderboardsMessage.setVisibility(View.VISIBLE);
-		}*/
+		}
 	}
 	
 	//retry button clicked

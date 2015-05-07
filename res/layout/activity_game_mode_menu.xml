@@ -14,7 +14,8 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="40sp"
-        android:layout_above="@+id/buttons_layout"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/adFragment"
         android:drawablePadding="5dp"/>
     
     <RelativeLayout
@@ -22,12 +23,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="40dp">
+        android:layout_below="@+id/title"
+        android:layout_marginTop="20dp">
     
+     <TextView
+       	android:id="@+id/bestScoreClassic"
+       	android:layout_alignLeft="@+id/classic"
+       	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+       	android:text="@string/bestScore"
+       	android:textColor="@color/cloud"
+       	android:textStyle="bold"
+       	android:textSize="18sp">
+	</TextView>   
+     
     <Button
         android:id="@+id/classic"
+        android:layout_below="@+id/bestScoreClassic"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="10dp"
@@ -42,10 +54,22 @@
         android:onClick="classicClicked"
         android:soundEffectsEnabled="false"/>
     
+    <TextView
+       	android:id="@+id/bestScoreChallenge"
+       	android:layout_marginTop="10dp"
+       	android:layout_below="@+id/classic"
+       	android:layout_alignLeft="@+id/challenge"
+       	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+       	android:text="@string/bestScore"
+       	android:textColor="@color/cloud"
+       	android:textStyle="bold"
+       	android:textSize="18sp">
+	</TextView>   
+    
     <Button
         android:id="@+id/challenge"
-        android:layout_below="@+id/classic"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/bestScoreChallenge"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="10dp"
@@ -63,7 +87,7 @@
     <Button
         android:id="@+id/back"
         android:layout_below="@+id/challenge"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"
