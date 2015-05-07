@@ -1,0 +1,224 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navy"
+    android:animateLayoutChanges="true"
+    tools:context="com.jchingdev.squares.MainActivity" >
+     
+    <!-- GAMEPLAY -->
+    
+    <View
+        android:id="@+id/vAnchor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"/>
+   
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultTimer"
+        android:textColor="@color/cloud"
+        android:textSize="40sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"/>
+    
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultScore"
+        android:textColor="@color/cloud"
+        android:textSize="40sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"/>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp">
+        
+        <Button
+        	android:id="@+id/answer"
+        	android:layout_width="100dp"
+        	android:layout_height="40dp"
+        	android:background="@drawable/yellow_square"
+        	android:text="@string/gamePrompt"
+        	android:textColor="@color/cloud"
+        	android:textStyle="bold"
+        	android:onClick="answerClicked"
+        	android:textSize="18sp"
+        	android:layout_above="@+id/square1"
+        	android:layout_marginBottom="60dp"
+        	android:enabled="false"/>
+        		
+    	<Button
+        	android:id="@+id/square1"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_above="@+id/square3"
+        	android:background="@drawable/tl_red"
+        	android:onClick="square1Clicked"
+        	android:soundEffectsEnabled="false"/>
+    
+    	<Button
+        	android:id="@+id/square2"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square1"
+        	android:layout_above="@+id/square3"
+        	android:background="@drawable/tr_yellow"
+        	android:onClick="square2Clicked"
+        	android:soundEffectsEnabled="false"/>
+    
+   		<Button
+        	android:id="@+id/square3"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentBottom="true"
+       		android:background="@drawable/bl_green"
+        	android:onClick="square3Clicked"
+        	android:soundEffectsEnabled="false"/>
+    
+    	<Button
+        	android:id="@+id/square4"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square3"
+        	android:layout_alignParentBottom="true"
+        	android:background="@drawable/br_blue"
+        	android:onClick="square4Clicked"
+        	android:soundEffectsEnabled="false"/>
+    
+   	</RelativeLayout>
+   	
+     <!-- PRE GAMEPLAY -->
+    <TextView
+        android:id="@+id/preGameTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/defaultPreGameTimer"
+        android:textColor="@color/cloud"
+        android:textSize="100sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+    
+    <!-- GAME OVER -->
+    <RelativeLayout
+        android:id="@+id/gameOverView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_trans50"
+        android:visibility="gone">
+        	
+       	<!-- ADMOB -->
+    	<fragment
+        	android:id="@+id/adFragment"
+        	android:name="com.jchingdev.squares.MainMenu$AdFragment"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:layout_alignParentTop="true" />
+        
+        	<RelativeLayout
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:layout_centerHorizontal="true"
+        	    android:layout_centerVertical="true"
+        	    android:padding="40dp"
+        	    android:background="@drawable/navy_container"
+        	    android:layout_margin="20dp">
+        	    
+        	    <TextView
+        	        android:id="@+id/gameOver"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="@string/gameOver"
+        	        android:textColor="@color/cloud"
+        	        android:textStyle="bold"
+        			android:textSize="35sp"
+        			android:layout_marginBottom="20dp"
+        			android:layout_centerHorizontal="true">
+        	    </TextView>
+        	    
+        	    <TextView
+        	        android:id="@+id/bestScore"
+        	        android:layout_below="@+id/gameOver"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="@string/bestScore"
+        	        android:textColor="@color/cloud"
+        	        android:textStyle="bold"
+        			android:textSize="18sp"
+        			android:layout_marginBottom="20dp"
+        			android:layout_centerHorizontal="true">
+        	    </TextView>
+        	    
+        	    <TextView
+        	        android:id="@+id/endScore"
+        	        android:layout_below="@+id/bestScore"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="@string/endScore"
+        	        android:textColor="@color/cloud"
+        	        android:textStyle="bold"
+        			android:textSize="18sp"
+        			android:layout_centerHorizontal="true"
+        			android:layout_marginBottom="20dp">
+        	    </TextView>
+        	    
+        	    <LinearLayout 
+        	        android:id="@+id/buttons_layout"
+        			android:layout_width="match_parent"
+        			android:layout_height="wrap_content"
+        			android:layout_centerHorizontal="true"
+        			android:layout_below="@+id/endScore">
+        			<Button
+        			    style="?android:attr/buttonBarButtonStyle" 
+        				android:layout_width="0dp"
+        				android:layout_height="wrap_content"
+        				android:text="@string/retry"
+        				android:gravity="center"
+        				android:layout_marginRight="5dp"
+        				android:paddingTop="10dp"
+        				android:paddingBottom="10dp"
+        				android:background="@drawable/gray_button"
+        				android:textColor="@color/cloud"
+        				android:layout_weight="1"
+        				android:onClick="retryClicked"
+        				android:soundEffectsEnabled="false"/>
+        			<Button
+        			    style="?android:attr/buttonBarButtonStyle"
+        				android:id="@+id/nextButton"
+        				android:layout_width="0dp"
+        				android:layout_height="wrap_content"
+        				android:text="@string/menu"
+        				android:gravity="center"
+        				android:layout_marginLeft="5dp"
+        				android:paddingTop="10dp"
+        				android:paddingBottom="10dp"
+        				android:background="@drawable/gray_button"
+        				android:textColor="@color/cloud"
+        				android:layout_weight="1"
+        				android:onClick="menuClicked"
+        				android:soundEffectsEnabled="false"/>       
+    			</LinearLayout>
+    			
+        	    <TextView
+        	        android:id="@+id/leaderboards_message"
+        	        android:layout_width="wrap_content"
+        	        android:layout_height="wrap_content"
+        	        android:text="@string/leaderboards_message"
+        	        android:textColor="@color/cloud"
+        	        android:layout_below="@+id/buttons_layout"
+        	        android:textSize="12sp"
+        	        android:layout_marginTop="20dp"/>
+        	    
+        	</RelativeLayout>
+        
+    </RelativeLayout>
+
+</RelativeLayout>
