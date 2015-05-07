@@ -31,7 +31,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"> >
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".MainMenu"

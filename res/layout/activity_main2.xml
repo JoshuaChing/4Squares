@@ -129,7 +129,7 @@
         	android:layout_height="50dp"
         	android:layout_alignParentBottom="true"
         	android:layout_toRightOf="@+id/square7"
-       		android:background="@drawable/m_brown"
+       		android:background="@drawable/m_pink"
         	android:onClick="square8Clicked"
         	android:soundEffectsEnabled="false"/>
     
@@ -139,7 +139,7 @@
         	android:layout_height="50dp"
         	android:layout_toRightOf="@+id/square8"
         	android:layout_alignParentBottom="true"
-        	android:background="@drawable/br_gray"
+        	android:background="@drawable/br_brown"
         	android:onClick="square9Clicked"
         	android:soundEffectsEnabled="false"/>
     

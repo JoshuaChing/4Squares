@@ -43,8 +43,11 @@
     <color name="purple_press">#8e44ad</color>
     <color name="gray">#95a5a6</color>
     <color name="gray_press">#7f8c8d</color>
-    <color name="brown">#825a2c</color>
-    <color name="brown_press">#5B3F1F</color>
+    <color name="brown">#8E6A41</color>
+    <color name="brown_press">#825a2c</color>
+    <color name="black">#000000</color>
+    <color name="pink">#FF7BDE</color>
+    <color name="pink_press">#CF64B4</color>
     
     <color name="cloud">#ffffff</color>
     <color name="cloud_dark">#ecf0f1</color>
