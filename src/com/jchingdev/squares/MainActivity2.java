@@ -3,8 +3,7 @@ package com.jchingdev.squares;
 import java.text.DecimalFormat;
 import java.util.Random;
 
-import com.chartboost.sdk.CBLocation;
-import com.chartboost.sdk.Chartboost;
+import com.chartboost.sdk.*;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameActivity;
 
