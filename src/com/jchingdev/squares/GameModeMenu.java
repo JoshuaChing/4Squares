@@ -1,17 +1,11 @@
 package com.jchingdev.squares;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class GameModeMenu extends FragmentActivity {
@@ -89,7 +83,7 @@ public class GameModeMenu extends FragmentActivity {
 	}
 	
 	/*AD MOB FRAGMENT*/
-	public static class AdFragment extends Fragment {
+	/*public static class AdFragment extends Fragment {
 
         private AdView mAdView;
 
@@ -122,7 +116,7 @@ public class GameModeMenu extends FragmentActivity {
         }
 
         /** Called when leaving the activity */
-        @Override
+        /*@Override
         public void onPause() {
             if (mAdView != null) {
                 mAdView.pause();
@@ -131,7 +125,7 @@ public class GameModeMenu extends FragmentActivity {
         }
 
         /** Called when returning to the activity */
-        @Override
+        /*@Override
         public void onResume() {
             super.onResume();
             if (mAdView != null) {
@@ -140,7 +134,7 @@ public class GameModeMenu extends FragmentActivity {
         }
 
         /** Called before the activity is destroyed */
-        @Override
+        /*@Override
         public void onDestroy() {
             if (mAdView != null) {
                 mAdView.destroy();
@@ -148,5 +142,5 @@ public class GameModeMenu extends FragmentActivity {
             super.onDestroy();
         }
 
-    }
+    }*/
 }

@@ -14,9 +14,8 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="40sp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/adFragment"
-        android:drawablePadding="5dp"/>
+        android:layout_marginTop="90dp"
+        android:drawablePadding="5dp"/><!--android:layout_below="@+id/adFragment"-->
     
     <RelativeLayout
         android:id="@+id/buttons_layout"
@@ -103,12 +102,12 @@
     </RelativeLayout>
     
     <!-- ADMOB -->
-    <fragment
+    <!--<fragment
         android:id="@+id/adFragment"
         android:name="com.jchingdev.squares.MainMenu$AdFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true" />-->
 
 
 </RelativeLayout>
