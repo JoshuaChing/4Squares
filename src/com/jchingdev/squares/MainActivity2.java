@@ -3,6 +3,8 @@ package com.jchingdev.squares;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+import com.chartboost.sdk.CBLocation;
+import com.chartboost.sdk.Chartboost;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameActivity;
 
@@ -67,8 +69,14 @@ public class MainActivity2 extends BaseGameActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		//initialize and cache chartboost
+		Chartboost.startWithAppId(this, getResources().getString(R.string.chartboost_app_id),
+				getResources().getString(R.string.chartboost_app_signature));
+		Chartboost.onCreate(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main2);
+		Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+		//disable automatic signup to google play
 		getGameHelper().setMaxAutoSignInAttempts(0);
 		//get display dimensions in dp
 		WindowManager wm = ((WindowManager)this.getSystemService(Context.WINDOW_SERVICE));
@@ -508,6 +516,17 @@ public class MainActivity2 extends BaseGameActivity {
 	
 	//function called when game is over
 	private void gameOver(){
+		if(Chartboost.hasInterstitial(CBLocation.LOCATION_DEFAULT)==false){
+			gameOverDisplay();
+			Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+		}else{
+			Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT); //show chartboost
+			gameOverDisplay();
+			Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+		}
+	}
+	
+	private void gameOverDisplay(){
 		square1.setEnabled(false);
 		square2.setEnabled(false);
 		square3.setEnabled(false);
@@ -577,10 +596,14 @@ public class MainActivity2 extends BaseGameActivity {
 	//back button pressed
 	@Override
 	public void onBackPressed() {
-		Intent intent = new Intent(this, GameModeMenu.class);
-		finish();
-		startActivity(intent);
-		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+		if(Chartboost.onBackPressed()){
+			return;
+		}else{
+			Intent intent = new Intent(this, GameModeMenu.class);
+			finish();
+			startActivity(intent);
+			overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+		}
 	}
 	
 	//play click sound
@@ -604,5 +627,36 @@ public class MainActivity2 extends BaseGameActivity {
 
 	@Override
 	public void onSignInSucceeded(){}
+
+	/*CHART BOOST EXTEND*/
+	@Override
+	public void onStart() {
+	    super.onStart();
+	    Chartboost.onStart(this);
+	}
+
+	@Override
+	public void onResume() {
+	    super.onResume();
+	    Chartboost.onResume(this);
+	}
+
+	@Override
+	public void onPause() {
+	    super.onPause();
+	    Chartboost.onPause(this);
+	}
+	        
+	@Override
+	public void onStop() {
+	    super.onStop();
+	    Chartboost.onStop(this);
+	}
+
+	@Override
+	public void onDestroy() {
+	    super.onDestroy();
+	    Chartboost.onDestroy(this);
+	}
 	
 }
