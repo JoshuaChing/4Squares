@@ -377,6 +377,7 @@ public class MainActivity extends BaseGameActivity {
 		if (score > bestScore){
 			bestScore = score;
 			storageEdit.putInt("bestScore",bestScore);
+			storageEdit.putBoolean("needSyncClassic", true);
 			storageEdit.commit();
 		}
 		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
@@ -388,6 +389,18 @@ public class MainActivity extends BaseGameActivity {
 			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.classic_leaderboard), score);
 		}else{
 			leaderboardsMessage.setVisibility(View.VISIBLE);
+		}
+		//sync local to leaderboards
+		syncBestScore();
+	}
+	
+	//method to sync best score
+	private void syncBestScore(){
+		boolean needSync = storage.getBoolean("needSyncClassic",true);
+		if(needSync && getApiClient().isConnected()){
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.classic_leaderboard), storage.getInt("bestScore",0));
+			storageEdit.putBoolean("needSyncClassic", false);
+			storageEdit.commit();
 		}
 	}
 	

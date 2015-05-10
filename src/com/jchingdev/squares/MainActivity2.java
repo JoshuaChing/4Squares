@@ -541,6 +541,7 @@ public class MainActivity2 extends BaseGameActivity {
 		if (score > bestScore){
 			bestScore = score;
 			storageEdit.putInt("bestScore3by3",bestScore);
+			storageEdit.putBoolean("needSync3by3", true);
 			storageEdit.commit();
 		}
 		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
@@ -552,6 +553,18 @@ public class MainActivity2 extends BaseGameActivity {
 			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.challenge_leaderboard), score);
 		}else{
 			leaderboardsMessage.setVisibility(View.VISIBLE);
+		}
+		//sync local to leaderboards
+		syncBestScore();
+	}
+	
+	//method to sync best score
+	private void syncBestScore(){
+		boolean needSync = storage.getBoolean("needSync3by3",true);
+		if(needSync && getApiClient().isConnected()){
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.classic_leaderboard), storage.getInt("bestScore3by3",0));
+			storageEdit.putBoolean("needSync3by3", false);
+			storageEdit.commit();
 		}
 	}
 	
