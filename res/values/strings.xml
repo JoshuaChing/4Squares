@@ -14,6 +14,7 @@
     <string name="endScore">SCORE: 0</string>
     <string name="retry">RETRY</string>
     <string name="menu">MENU</string>
+    <string name="twitter_share">TWEET SCORE</string>
     <string name="defaultPreGameTimer">3</string>
     <string name="leaderboards_message">*Sign into Google Play to submit your scores to the leaderboards!</string>
 

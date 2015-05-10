@@ -15,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -421,6 +422,14 @@ public class MainActivity extends BaseGameActivity {
 		finish();
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+	}
+	
+	//share button clicked
+	public void shareClicked(View view){
+		String tweetUrl = "https://twitter.com/intent/tweet?text=I just scored " + score + " points in 4 Squares! Think you can beat me? &url="
+                + "https://play.google.com/store/apps/details?id=com.jchingdev.squares";
+		Uri uri = Uri.parse(tweetUrl);
+		startActivity(new Intent(Intent.ACTION_VIEW, uri));
 	}
 	
 	//back button pressed
