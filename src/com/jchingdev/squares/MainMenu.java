@@ -1,6 +1,6 @@
 package com.jchingdev.squares;
 
-import com.chartboost.sdk.*;
+//import com.chartboost.sdk.*;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.games.Games;
@@ -30,9 +30,9 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		//initialize and cache chartboost
-		Chartboost.startWithAppId(this, getResources().getString(R.string.chartboost_app_id),
+		/*Chartboost.startWithAppId(this, getResources().getString(R.string.chartboost_app_id),
 			getResources().getString(R.string.chartboost_app_signature));
-		Chartboost.onCreate(this);
+		Chartboost.onCreate(this);*/
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
@@ -55,7 +55,7 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	@Override
 	public void onResume(){
 		super.onResume();
-	    Chartboost.onResume(this);
+	    //Chartboost.onResume(this);
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	}
 	
 	/*CHART BOOST EXTEND*/
-	@Override
+	/*@Override
 	public void onStart() {
 	    super.onStart();
 	    Chartboost.onStart(this);
@@ -237,5 +237,5 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 	        return;
 	    else
 	        super.onBackPressed();
-	}
+	}*/
 }

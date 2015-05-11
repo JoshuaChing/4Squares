@@ -360,11 +360,11 @@ public class MainActivity extends BaseGameActivity {
 	private void gameOver(){
 		if(Chartboost.hasInterstitial(CBLocation.LOCATION_DEFAULT)==false){
 			gameOverDisplay();
-			//Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+			Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		}else{
-			//Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT); //show chartboost
+			Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT); //show chartboost
 			gameOverDisplay();
-			//Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+			Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		}
 	}
 	
