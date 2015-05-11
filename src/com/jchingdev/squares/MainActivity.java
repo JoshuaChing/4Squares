@@ -1,6 +1,7 @@
 package com.jchingdev.squares;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Random;
 
 import com.google.android.gms.games.Games;
@@ -12,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.media.MediaPlayer;
@@ -49,7 +51,6 @@ public class MainActivity extends BaseGameActivity {
 	private TextView leaderboardsMessage;
 	private TextView endScoreView;
 	private TextView bestScoreView;
-	
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
 	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
 	private Random random;
@@ -359,11 +360,11 @@ public class MainActivity extends BaseGameActivity {
 	private void gameOver(){
 		if(Chartboost.hasInterstitial(CBLocation.LOCATION_DEFAULT)==false){
 			gameOverDisplay();
-			Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+			//Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		}else{
-			Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT); //show chartboost
+			//Chartboost.showInterstitial(CBLocation.LOCATION_DEFAULT); //show chartboost
 			gameOverDisplay();
-			Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
+			//Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		}
 	}
 	
@@ -443,6 +444,33 @@ public class MainActivity extends BaseGameActivity {
                 + "https://play.google.com/store/apps/details?id=com.jchingdev.squares";
 		Uri uri = Uri.parse(tweetUrl);
 		startActivity(new Intent(Intent.ACTION_VIEW, uri));
+	}
+	
+	@SuppressLint("DefaultLocale")
+	public void facebookShareClicked(View view){
+		String url = "https://play.google.com/store/apps/details?id=com.jchingdev.squares";
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_TEXT, url);
+
+		// See if official Facebook app is found
+		boolean facebookAppFound = false;
+		List<ResolveInfo> matches = getPackageManager().queryIntentActivities(intent, 0);
+		for (ResolveInfo info : matches) {
+		    if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook.katana")) {
+		        intent.setPackage(info.activityInfo.packageName);
+		        facebookAppFound = true;
+		        break;
+		    }
+		}
+
+		// As fallback, launch sharer.php in a browser
+		if (!facebookAppFound) {
+		    String sharerUrl = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+		    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
+		}
+
+		startActivity(intent);
 	}
 	
 	//back button pressed

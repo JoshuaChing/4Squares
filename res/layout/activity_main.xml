@@ -199,26 +199,53 @@
         				android:soundEffectsEnabled="false"/>       
     			</LinearLayout>
     			
+        	    <LinearLayout 
+        	        android:id="@+id/buttons2_layout"
+        			android:layout_width="match_parent"
+        			android:layout_height="wrap_content"
+        			android:layout_centerHorizontal="true"
+        			android:layout_below="@+id/buttons_layout">
+        	    
+        	    <Button
+        			style="?android:attr/buttonBarButtonStyle"
+        			android:id="@+id/facebook_shareButton"
+        			android:layout_width="0dp"
+        			android:layout_weight="1"
+        			android:layout_height="wrap_content"
+        			android:text="@string/facebook_share"
+        			android:gravity="center"
+        			android:paddingTop="10dp"
+        			android:paddingBottom="10dp"
+        			android:layout_marginTop="10dp"
+        			android:background="@drawable/gray_button"
+        			android:textColor="@color/cloud"
+        			android:onClick="facebookShareClicked"
+        			android:drawableLeft="@drawable/facebook"
+        			android:paddingLeft="7dp"
+        			android:paddingRight="7dp"
+        			android:soundEffectsEnabled="false"/>  
+        	    
         	    <Button
         			style="?android:attr/buttonBarButtonStyle"
         			android:id="@+id/twitter_shareButton"
-        			android:layout_width="wrap_content"
+        			android:layout_width="0dp"
+        			android:layout_weight="1"
         			android:layout_height="wrap_content"
-        			android:layout_below="@+id/buttons_layout"
         			android:text="@string/twitter_share"
         			android:gravity="center"
         			android:paddingTop="10dp"
         			android:paddingBottom="10dp"
         			android:layout_marginTop="10dp"
-        			android:layout_alignLeft="@+id/buttons_layout"
-        			android:layout_alignRight="@+id/buttons_layout"
+        			android:layout_marginLeft="10dp"
         			android:background="@drawable/gray_button"
         			android:textColor="@color/cloud"
         			android:onClick="shareClicked"
         			android:drawableLeft="@drawable/twitter"
-        			android:paddingLeft="20dp"
-        			android:paddingRight="20dp"
-        			android:soundEffectsEnabled="false"/>  
+        			android:paddingLeft="7dp"
+        			android:paddingRight="7dp"
+        			android:soundEffectsEnabled="false"/>
+        	    
+        	    </LinearLayout>
     			
         	    <TextView
         	        android:id="@+id/leaderboards_message"
@@ -226,7 +253,7 @@
         	        android:layout_height="wrap_content"
         	        android:text="@string/leaderboards_message"
         	        android:textColor="@color/cloud"
-        	        android:layout_below="@+id/twitter_shareButton"
+        	        android:layout_below="@+id/buttons2_layout"
         	        android:textSize="12sp"
         	        android:layout_marginTop="20dp"/>
         	    
