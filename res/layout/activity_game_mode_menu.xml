@@ -27,7 +27,7 @@
         
      <TextView
        	android:id="@+id/bestScoreClassic"
-       	android:layout_below="@+id/title"
+       	android:layout_below="@+id/challenge"
        	android:layout_alignLeft="@+id/classic"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -56,8 +56,7 @@
     
     <TextView
        	android:id="@+id/bestScoreChallenge"
-       	android:layout_marginTop="10dp"
-       	android:layout_below="@+id/classic"
+       	android:layout_below="@+id/insane"
        	android:layout_alignLeft="@+id/challenge"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -86,8 +85,7 @@
     
     <TextView
        	android:id="@+id/bestScoreInsane"
-       	android:layout_marginTop="10dp"
-       	android:layout_below="@+id/challenge"
+       	android:layout_below="@+id/title"
        	android:layout_alignLeft="@+id/challenge"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -116,8 +114,8 @@
     
     <Button
         android:id="@+id/back"
-        android:layout_below="@+id/insane"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/classic"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"
