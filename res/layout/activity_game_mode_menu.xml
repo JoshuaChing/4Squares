@@ -3,9 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navy"
-    tools:context="${relativePackage}.${activityClass}" >
+    tools:context="${relativePackage}.${activityClass}"
+    tools:ignore="UselessParent" >
+
+    <RelativeLayout
+        android:id="@+id/buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
     
-    <TextView
+     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,19 +22,12 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="40sp"
-        android:layout_marginTop="90dp"
-        android:drawablePadding="5dp"/><!--android:layout_below="@+id/adFragment"-->
-    
-    <RelativeLayout
-        android:id="@+id/buttons_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="20dp">
-    
+        android:layout_marginBottom="20dp"
+        android:drawablePadding="5dp"/>
+        
      <TextView
        	android:id="@+id/bestScoreClassic"
+       	android:layout_below="@+id/title"
        	android:layout_alignLeft="@+id/classic"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -83,9 +84,39 @@
         android:onClick="challengeClicked"
         android:soundEffectsEnabled="false"/>
     
+    <TextView
+       	android:id="@+id/bestScoreInsane"
+       	android:layout_marginTop="10dp"
+       	android:layout_below="@+id/challenge"
+       	android:layout_alignLeft="@+id/challenge"
+       	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+       	android:text="@string/bestScore"
+       	android:textColor="@color/cloud"
+       	android:textStyle="bold"
+       	android:textSize="18sp">
+	</TextView>   
+    
+    <Button
+        android:id="@+id/insane"
+        android:layout_below="@+id/bestScoreInsane"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/insaneMode"
+        android:background="@drawable/gray_button"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:onClick="insaneClicked"
+        android:soundEffectsEnabled="false"/>
+    
     <Button
         android:id="@+id/back"
-        android:layout_below="@+id/challenge"
+        android:layout_below="@+id/insane"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"

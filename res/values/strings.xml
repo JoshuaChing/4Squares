@@ -30,6 +30,7 @@
     <string name="gameModeTitle">GAME MODES</string>
     <string name="classicMode">CLASSIC 2x2</string>
     <string name="challengeMode">CHALLENGE 3x3</string>
+    <string name="insaneMode">INSANE 4x4</string>
     
     <!-- COLOR -->
     <color name="navy">#2c3e50</color>
@@ -56,6 +57,19 @@
     <color name="pink">#FF7BDE</color>
     <color name="pink_press">#CF64B4</color>
     
+    <color name="red2">#E85E50</color>
+    <color name="red3">#EA6E62</color>
+    <color name="red4">#EC7C72</color>
+    <color name="yellow2">#F2CA27</color>
+    <color name="yellow3">#F3CF3D</color>
+    <color name="yellow4">#F4D450</color>
+    <color name="green2">#43D17F</color>
+    <color name="green3">#56D68C</color>
+    <color name="green4">#67DA98</color>
+    <color name="blue2">#48A2DF</color>
+    <color name="blue3">#5AABE2</color>
+    <color name="blue4">#6AB3E5</color>
+    
     <color name="cloud">#ffffff</color>
     <color name="cloud_dark">#ecf0f1</color>
     <color name="black_trans50">#80000000</color>
@@ -73,5 +87,6 @@
 	<string name="app_id">1234567890</string>
 	<string name="classic_leaderboard">abcdefg1234567</string>
 	<string name="challenge_leaderboard">abcdefg1234567</string>
+	<string name="insane_leaderboard">abcdefg1234567</string>
 
 </resources>

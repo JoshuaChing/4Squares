@@ -113,7 +113,7 @@
  		android:layout_height="wrap_content"
  		android:text="Sign Out"
  		android:visibility="gone"
- 		
+
  		android:background="@drawable/red_button_signout"
  		android:layout_marginTop="4dp"
  		android:paddingTop="11dp"

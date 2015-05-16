@@ -14,6 +14,7 @@ public class GameModeMenu extends FragmentActivity {
 	private SharedPreferences storage;
 	private TextView bestScoreClassicView;
 	private TextView bestScoreChallengeView;
+	private TextView bestScoreInsaneView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class GameModeMenu extends FragmentActivity {
 		storage = getSharedPreferences("STORAGE", MODE_PRIVATE);
 		bestScoreClassicView = (TextView)findViewById(R.id.bestScoreClassic);
 		bestScoreChallengeView = (TextView)findViewById(R.id.bestScoreChallenge);
+		bestScoreInsaneView = (TextView)findViewById(R.id.bestScoreInsane);
 		displayBestScores();
 	}
 	
@@ -49,6 +51,7 @@ public class GameModeMenu extends FragmentActivity {
 	public void displayBestScores(){
 		bestScoreClassicView.setText("BEST: "+String.valueOf(storage.getInt("bestScore", 0)));
 		bestScoreChallengeView.setText("BEST: "+String.valueOf(storage.getInt("bestScore3by3", 0)));
+		bestScoreInsaneView.setText("BEST: "+String.valueOf(storage.getInt("bestScore4by4", 0)));
 	}
 	
 	//classic mode button pressed
@@ -68,6 +71,17 @@ public class GameModeMenu extends FragmentActivity {
 			clickSound.start();
 		}
 		Intent intent = new Intent(this, MainActivity2.class);
+		finish();
+		startActivity(intent);
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+	}
+	
+	//insane mode button pressed
+	public void insaneClicked(View view){
+		if (storage.getBoolean("volume",true)){
+			clickSound.start();
+		}
+		Intent intent = new Intent(this, MainActivity3.class);
 		finish();
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);

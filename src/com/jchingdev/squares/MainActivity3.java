@@ -30,7 +30,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity2 extends BaseGameActivity {
+public class MainActivity3 extends BaseGameActivity {
 	
 	//dimension variables
 	private float density;
@@ -47,6 +47,13 @@ public class MainActivity2 extends BaseGameActivity {
 	private Button square7;
 	private Button square8;
 	private Button square9;
+	private Button square10;
+	private Button square11;
+	private Button square12;
+	private Button square13;
+	private Button square14;
+	private Button square15;
+	private Button square16;
 	private TextView scoreView;
 	private TextView timerView;
 	private TextView preGameTimerView;
@@ -56,8 +63,8 @@ public class MainActivity2 extends BaseGameActivity {
 	private TextView endScoreView;
 	private TextView bestScoreView;
 	
-	//game variables, 0 = red, 1 = orange, 2 = yellow, 3 = blue, 4 = turquoise, 5 = green, 6 = purple, 7 = pink, 8 = brown
-	private int[] squares = {0,1,2,3,4,5,6,7,8}; //squares that user see, will be shuffled
+	//game variables
+	private int[] squares = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}; //squares that user see, will be shuffled
 	private Random random;
 	private int answer;
 	private int score;
@@ -76,7 +83,7 @@ public class MainActivity2 extends BaseGameActivity {
 				getResources().getString(R.string.chartboost_app_signature));
 		Chartboost.onCreate(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main2);
+		setContentView(R.layout.activity_main3);
 		Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		//disable automatic signup to google play
 		getGameHelper().setMaxAutoSignInAttempts(0);
@@ -102,11 +109,18 @@ public class MainActivity2 extends BaseGameActivity {
 		square7 = (Button)findViewById(R.id.square7);
 		square8 = (Button)findViewById(R.id.square8);
 		square9 = (Button)findViewById(R.id.square9);
+		square10 = (Button)findViewById(R.id.square10);
+		square11 = (Button)findViewById(R.id.square11);
+		square12 = (Button)findViewById(R.id.square12);
+		square13 = (Button)findViewById(R.id.square13);
+		square14 = (Button)findViewById(R.id.square14);
+		square15 = (Button)findViewById(R.id.square15);
+		square16 = (Button)findViewById(R.id.square16);
 		answerButton = (Button)findViewById(R.id.answer);
 		gameOverView = (RelativeLayout)findViewById(R.id.gameOverView);
 		leaderboardsMessage = (TextView)findViewById(R.id.leaderboards_message);
 	    //calculate and set square dimensions
-	    squareSize = (dpWidth-80)/3.0;
+	    squareSize = (dpWidth-80)/4.0;
 		setSquareSize(square1, (int)squareSize, (int)squareSize);
 		setSquareSize(square2, (int)squareSize, (int)squareSize);
 		setSquareSize(square3, (int)squareSize, (int)squareSize);
@@ -116,7 +130,14 @@ public class MainActivity2 extends BaseGameActivity {
 		setSquareSize(square7, (int)squareSize, (int)squareSize);
 		setSquareSize(square8, (int)squareSize, (int)squareSize);
 		setSquareSize(square9, (int)squareSize, (int)squareSize);
-		setSquareSize(answerButton,(int)squareSize*3,(int)((dpWidth-80)/4.0));
+		setSquareSize(square10, (int)squareSize, (int)squareSize);
+		setSquareSize(square11, (int)squareSize, (int)squareSize);
+		setSquareSize(square12, (int)squareSize, (int)squareSize);
+		setSquareSize(square13, (int)squareSize, (int)squareSize);
+		setSquareSize(square14, (int)squareSize, (int)squareSize);
+		setSquareSize(square15, (int)squareSize, (int)squareSize);
+		setSquareSize(square16, (int)squareSize, (int)squareSize);
+		setSquareSize(answerButton,(int)squareSize*4,(int)((dpWidth-80)/4.0));
 		//disable buttons
 		square1.setEnabled(false);
 		square2.setEnabled(false);
@@ -127,6 +148,13 @@ public class MainActivity2 extends BaseGameActivity {
 		square7.setEnabled(false);
 		square8.setEnabled(false);
 		square9.setEnabled(false);
+		square10.setEnabled(false);
+		square11.setEnabled(false);
+		square12.setEnabled(false);
+		square13.setEnabled(false);
+		square14.setEnabled(false);
+		square15.setEnabled(false);
+		square16.setEnabled(false);
 		//set up sounds
 		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
 		wrongSound = MediaPlayer.create(getBaseContext(), R.raw.wrong);
@@ -135,8 +163,8 @@ public class MainActivity2 extends BaseGameActivity {
 		storageEdit= storage.edit();
 		volume = storage.getBoolean("volume", true);
 		random = new Random();
-		answer = random.nextInt(9);
-		setSquareColour(answer,answerButton);
+		answer = random.nextInt(16);
+		setSquareColourM(answer,answerButton);
 		score = 0;
 		startPreGameTimer();
 	}
@@ -231,143 +259,32 @@ public class MainActivity2 extends BaseGameActivity {
 		checkAnswer(8);
 	}
 	
-	public void setSquareColour(int i,Button b){
-		switch (i){
-			case 0:
-				b.setBackgroundResource(R.drawable.red_square);
-				break;
-			case 1:
-				b.setBackgroundResource(R.drawable.orange_square);
-				break;
-			case 2:
-				b.setBackgroundResource(R.drawable.yellow_square);
-				break;
-			case 3:
-				b.setBackgroundResource(R.drawable.blue_square);
-				break;
-			case 4:
-				b.setBackgroundResource(R.drawable.turquoise_square);
-				break;
-			case 5:
-				b.setBackgroundResource(R.drawable.green_square);
-				break;
-			case 6:
-				b.setBackgroundResource(R.drawable.purple_square);
-				break;
-			case 7:
-				b.setBackgroundResource(R.drawable.pink_square);
-				break;
-			case 8:
-				b.setBackgroundResource(R.drawable.brown_square);
-				break;
-			default:
-				b.setBackgroundResource(R.drawable.red_square);
-		}
+	public void square10Clicked(View view){
+		checkAnswer(9);
 	}
 	
-	//TOP LEFT set square colour
-	public void setSquareColourTL(int i,Button b){
-		switch (i){
-			case 0:
-				b.setBackgroundResource(R.drawable.tl_red);
-				break;
-			case 1:
-				b.setBackgroundResource(R.drawable.tl_orange);
-				break;
-			case 2:
-				b.setBackgroundResource(R.drawable.tl_yellow);
-				break;
-			case 3:
-				b.setBackgroundResource(R.drawable.tl_blue);
-				break;
-			case 4:
-				b.setBackgroundResource(R.drawable.tl_turquoise);
-				break;
-			case 5:
-				b.setBackgroundResource(R.drawable.tl_green);
-				break;
-			case 6:
-				b.setBackgroundResource(R.drawable.tl_purple);
-				break;
-			case 7:
-				b.setBackgroundResource(R.drawable.tl_pink);
-				break;
-			case 8:
-				b.setBackgroundResource(R.drawable.tl_brown);
-				break;
-			default:
-				b.setBackgroundResource(R.drawable.tl_red);
-		}
+	public void square11Clicked(View view){
+		checkAnswer(10);
 	}
 	
-	//TOP RIGHT set square colour
-	public void setSquareColourTR(int i,Button b){
-		switch (i){
-			case 0:
-				b.setBackgroundResource(R.drawable.tr_red);
-				break;
-			case 1:
-				b.setBackgroundResource(R.drawable.tr_orange);
-				break;
-			case 2:
-				b.setBackgroundResource(R.drawable.tr_yellow);
-				break;
-			case 3:
-				b.setBackgroundResource(R.drawable.tr_blue);
-				break;
-			case 4:
-				b.setBackgroundResource(R.drawable.tr_turquoise);
-				break;
-			case 5:
-				b.setBackgroundResource(R.drawable.tr_green);
-				break;
-			case 6:
-				b.setBackgroundResource(R.drawable.tr_purple);
-				break;
-			case 7:
-				b.setBackgroundResource(R.drawable.tr_pink);
-				break;
-			case 8:
-				b.setBackgroundResource(R.drawable.tr_brown);
-				break;
-			default:
-				b.setBackgroundResource(R.drawable.tr_red);
-		}
+	public void square12Clicked(View view){
+		checkAnswer(11);
 	}
 	
-	//BOTTOM LEFT set square colour
-	public void setSquareColourBL(int i,Button b){
-		switch (i){
-			case 0:
-				b.setBackgroundResource(R.drawable.bl_red);
-				break;
-			case 1:
-				b.setBackgroundResource(R.drawable.bl_orange);
-				break;
-			case 2:
-				b.setBackgroundResource(R.drawable.bl_yellow);
-				break;
-			case 3:
-				b.setBackgroundResource(R.drawable.bl_blue);
-				break;
-			case 4:
-				b.setBackgroundResource(R.drawable.bl_turquoise);
-				break;
-			case 5:
-				b.setBackgroundResource(R.drawable.bl_green);
-				break;
-			case 6:
-				b.setBackgroundResource(R.drawable.bl_purple);
-				break;
-			case 7:
-				b.setBackgroundResource(R.drawable.bl_pink);
-				break;
-			case 8:
-				b.setBackgroundResource(R.drawable.bl_brown);
-				break;
-			default:
-				b.setBackgroundResource(R.drawable.bl_red);
-		}
+	public void square13Clicked(View view){
+		checkAnswer(12);
+	}
+	
+	public void square14Clicked(View view){
+		checkAnswer(13);
+	}
+	
+	public void square15Clicked(View view){
+		checkAnswer(14);
+	}
+	
+	public void square16Clicked(View view){
+		checkAnswer(15);
 	}
 	
 	//MID set square colour
@@ -377,68 +294,54 @@ public class MainActivity2 extends BaseGameActivity {
 				b.setBackgroundResource(R.drawable.m_red);
 				break;
 			case 1:
-				b.setBackgroundResource(R.drawable.m_orange);
+				b.setBackgroundResource(R.drawable.m_red2);
 				break;
 			case 2:
-				b.setBackgroundResource(R.drawable.m_yellow);
+				b.setBackgroundResource(R.drawable.m_red3);
 				break;
 			case 3:
-				b.setBackgroundResource(R.drawable.m_blue);
+				b.setBackgroundResource(R.drawable.m_red4);
 				break;
 			case 4:
-				b.setBackgroundResource(R.drawable.m_turquoise);
+				b.setBackgroundResource(R.drawable.m_yellow);
 				break;
 			case 5:
-				b.setBackgroundResource(R.drawable.m_green);
+				b.setBackgroundResource(R.drawable.m_yellow2);
 				break;
 			case 6:
-				b.setBackgroundResource(R.drawable.m_purple);
+				b.setBackgroundResource(R.drawable.m_yellow3);
 				break;
 			case 7:
-				b.setBackgroundResource(R.drawable.m_pink);
+				b.setBackgroundResource(R.drawable.m_yellow4);
 				break;
 			case 8:
-				b.setBackgroundResource(R.drawable.m_brown);
+				b.setBackgroundResource(R.drawable.m_green);
+				break;
+			case 9:
+				b.setBackgroundResource(R.drawable.m_green2);
+				break;
+			case 10:
+				b.setBackgroundResource(R.drawable.m_green3);
+				break;
+			case 11:
+				b.setBackgroundResource(R.drawable.m_green4);
+				break;
+			case 12:
+				b.setBackgroundResource(R.drawable.m_blue);
+				break;
+			case 13:
+				b.setBackgroundResource(R.drawable.m_blue2);
+				break;
+			case 14:
+				b.setBackgroundResource(R.drawable.m_blue3);
+				break;
+			case 15:
+				b.setBackgroundResource(R.drawable.m_blue4);
 				break;
 			default:
 				b.setBackgroundResource(R.drawable.m_red);
 		}
 	}
-	
-	//BOTTOM RIGHT set square colour
-	public void setSquareColourBR(int i,Button b){
-		switch (i){
-			case 0:
-				b.setBackgroundResource(R.drawable.br_red);
-				break;
-			case 1:
-				b.setBackgroundResource(R.drawable.br_orange);
-				break;
-			case 2:
-				b.setBackgroundResource(R.drawable.br_yellow);
-				break;
-			case 3:
-				b.setBackgroundResource(R.drawable.br_blue);
-				break;
-			case 4:
-				b.setBackgroundResource(R.drawable.br_turquoise);
-				break;
-			case 5:
-				b.setBackgroundResource(R.drawable.br_green);
-				break;
-			case 6:
-				b.setBackgroundResource(R.drawable.br_purple);
-				break;
-			case 7:
-				b.setBackgroundResource(R.drawable.br_pink);
-				break;
-			case 8:
-				b.setBackgroundResource(R.drawable.br_brown);
-				break;
-			default:
-				b.setBackgroundResource(R.drawable.br_red);
-		}
-	}	
 		
 	//called when square is clicked
 	//where answer is the correct answer for the current round
@@ -450,20 +353,27 @@ public class MainActivity2 extends BaseGameActivity {
 	        playClickSound();
 			
 			//set new answer
-			answer = random.nextInt(9);		//new answer
-			setSquareColour(answer,answerButton);
+			answer = random.nextInt(16);		//new answer
+			setSquareColourM(answer,answerButton);
 			
 			//change new colours of squares
 			shuffleArray(squares);
-			setSquareColourTL(squares[0],square1);
+			setSquareColourM(squares[0],square1);
 			setSquareColourM(squares[1],square2);
-			setSquareColourTR(squares[2],square3);
+			setSquareColourM(squares[2],square3);
 			setSquareColourM(squares[3],square4);
 			setSquareColourM(squares[4],square5);
 			setSquareColourM(squares[5],square6);
-			setSquareColourBL(squares[6],square7);
+			setSquareColourM(squares[6],square7);
 			setSquareColourM(squares[7],square8);
-			setSquareColourBR(squares[8],square9);
+			setSquareColourM(squares[8],square9);
+			setSquareColourM(squares[9],square10);
+			setSquareColourM(squares[10],square11);
+			setSquareColourM(squares[11],square12);
+			setSquareColourM(squares[12],square13);
+			setSquareColourM(squares[13],square14);
+			setSquareColourM(squares[14],square15);
+			setSquareColourM(squares[15],square16);
 			
 			//set new score
 			score++;
@@ -510,6 +420,13 @@ public class MainActivity2 extends BaseGameActivity {
 		 		 square7.setEnabled(true);
 		 		 square8.setEnabled(true);
 		 		 square9.setEnabled(true);
+		    	 square10.setEnabled(true);
+		 		 square11.setEnabled(true);
+		 		 square12.setEnabled(true);
+		 		 square13.setEnabled(true);
+		 		 square14.setEnabled(true);
+		 		 square15.setEnabled(true);
+		 		 square16.setEnabled(true);
 		    	 preGameTimerView.setVisibility(View.GONE);
 		    	 startTimer();
 		     }
@@ -539,11 +456,11 @@ public class MainActivity2 extends BaseGameActivity {
 		square8.setEnabled(false);
 		square9.setEnabled(false);
 		answerButton.setEnabled(false);
-		bestScore = storage.getInt("bestScore3by3",0);
+		bestScore = storage.getInt("bestScore4by4",0);
 		if (score > bestScore){
 			bestScore = score;
-			storageEdit.putInt("bestScore3by3",bestScore);
-			storageEdit.putBoolean("needSync3by3", true);
+			storageEdit.putInt("bestScore4by4",bestScore);
+			storageEdit.putBoolean("needSync4by4", true);
 			storageEdit.commit();
 		}
 		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
@@ -552,7 +469,7 @@ public class MainActivity2 extends BaseGameActivity {
 		//submit score to google play service
 		if(getApiClient().isConnected()){
 			leaderboardsMessage.setVisibility(View.GONE);
-			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.challenge_leaderboard), score);
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.insane_leaderboard), score);
 		}else{
 			leaderboardsMessage.setVisibility(View.VISIBLE);
 		}
@@ -562,10 +479,10 @@ public class MainActivity2 extends BaseGameActivity {
 	
 	//method to sync best score
 	private void syncBestScore(){
-		boolean needSync = storage.getBoolean("needSync3by3",true);
+		boolean needSync = storage.getBoolean("needSync4by4",true);
 		if(needSync && getApiClient().isConnected()){
-			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.challenge_leaderboard), storage.getInt("bestScore3by3",0));
-			storageEdit.putBoolean("needSync3by3", false);
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.insane_leaderboard), storage.getInt("bestScore4by4",0));
+			storageEdit.putBoolean("needSync4by4", false);
 			storageEdit.commit();
 		}
 	}
@@ -574,25 +491,32 @@ public class MainActivity2 extends BaseGameActivity {
 	public void retryClicked(View view){
 		playClickSound();
 		//get new answer
-		answer = random.nextInt(9);
-		setSquareColour(answer,answerButton);
+		answer = random.nextInt(16);
+		setSquareColourM(answer,answerButton);
 		//score and time views reset
 		score = 0;
 		timerView.setText("30.00");
 		scoreView.setText("0");
 		//reset squares
-		for (int i = 0; i < 9; i++){
+		for (int i = 0; i < 16; i++){
 			squares[i] = i;
 		}
-		setSquareColourTL(squares[0],square1);
+		setSquareColourM(squares[0],square1);
 		setSquareColourM(squares[1],square2);
-		setSquareColourTR(squares[2],square3);
+		setSquareColourM(squares[2],square3);
 		setSquareColourM(squares[3],square4);
 		setSquareColourM(squares[4],square5);
 		setSquareColourM(squares[5],square6);
-		setSquareColourBL(squares[6],square7);
+		setSquareColourM(squares[6],square7);
 		setSquareColourM(squares[7],square8);
-		setSquareColourBR(squares[8],square9);
+		setSquareColourM(squares[8],square9);
+		setSquareColourM(squares[9],square10);
+		setSquareColourM(squares[10],square11);
+		setSquareColourM(squares[11],square12);
+		setSquareColourM(squares[12],square13);
+		setSquareColourM(squares[13],square14);
+		setSquareColourM(squares[14],square15);
+		setSquareColourM(squares[15],square16);
 		//show proper views and start pre game timer
 		gameOverView.setVisibility(View.GONE);
 		preGameTimerView.setVisibility(View.VISIBLE);
