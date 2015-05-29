@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/navy"
     android:animateLayoutChanges="true"
-    tools:context="com.jchingdev.squares.MainActivity2" >
+    tools:context="com.jchingdev.squares.singleplayer.MainActivity2" >
      
     <!-- GAMEPLAY -->
     

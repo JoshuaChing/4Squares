@@ -1,5 +1,9 @@
 package com.jchingdev.squares;
 
+import com.jchingdev.squares.singleplayer.MainActivity;
+import com.jchingdev.squares.singleplayer.MainActivity2;
+import com.jchingdev.squares.singleplayer.MainActivity3;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
