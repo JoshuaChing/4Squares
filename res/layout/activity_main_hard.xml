@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/navy"
     android:animateLayoutChanges="true"
-    tools:context="com.jchingdev.squares.singleplayer.MainActivity" >
+    tools:context="com.jchingdev.squares.singleplayer.MainActivityHard" >
      
     <!-- GAMEPLAY -->
     
@@ -46,7 +46,7 @@
         	android:id="@+id/answer"
         	android:layout_width="100dp"
         	android:layout_height="40dp"
-        	android:background="@drawable/yellow_square"
+        	android:background="@drawable/turquoise_square"
         	android:text="@string/gamePrompt"
         	android:textColor="@color/cloud"
         	android:textStyle="bold"
@@ -60,7 +60,7 @@
         	android:id="@+id/square1"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
-        	android:layout_above="@+id/square3"
+        	android:layout_above="@+id/square4"
         	android:background="@drawable/tl_red"
         	android:onClick="square1Clicked"
         	android:soundEffectsEnabled="false"/>
@@ -70,28 +70,77 @@
         	android:layout_width="50dp"
         	android:layout_height="50dp"
         	android:layout_toRightOf="@+id/square1"
-        	android:layout_above="@+id/square3"
-        	android:background="@drawable/tr_yellow"
+        	android:layout_above="@+id/square5"
+        	android:background="@drawable/m_orange"
         	android:onClick="square2Clicked"
         	android:soundEffectsEnabled="false"/>
-    
-   		<Button
+    	
+    	<Button
         	android:id="@+id/square3"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
-        	android:layout_alignParentBottom="true"
-       		android:background="@drawable/bl_green"
+        	android:layout_toRightOf="@+id/square2"
+        	android:layout_above="@+id/square6"
+        	android:background="@drawable/tr_yellow"
         	android:onClick="square3Clicked"
         	android:soundEffectsEnabled="false"/>
-    
+    	
     	<Button
         	android:id="@+id/square4"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square3"
-        	android:layout_alignParentBottom="true"
-        	android:background="@drawable/br_blue"
+        	android:layout_above="@+id/square7"
+        	android:background="@drawable/m_blue"
         	android:onClick="square4Clicked"
+        	android:soundEffectsEnabled="false"/>
+    	
+    	<Button
+        	android:id="@+id/square5"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square4"
+        	android:layout_above="@+id/square8"
+        	android:background="@drawable/m_turquoise"
+        	android:onClick="square5Clicked"
+        	android:soundEffectsEnabled="false"/>
+    	
+    	<Button
+        	android:id="@+id/square6"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square5"
+        	android:layout_above="@+id/square9"
+        	android:background="@drawable/m_green"
+        	android:onClick="square6Clicked"
+        	android:soundEffectsEnabled="false"/>
+    
+   		<Button
+        	android:id="@+id/square7"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentBottom="true"
+       		android:background="@drawable/bl_purple"
+        	android:onClick="square7Clicked"
+        	android:soundEffectsEnabled="false"/>
+   		
+   		<Button
+        	android:id="@+id/square8"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentBottom="true"
+        	android:layout_toRightOf="@+id/square7"
+       		android:background="@drawable/m_pink"
+        	android:onClick="square8Clicked"
+        	android:soundEffectsEnabled="false"/>
+    
+    	<Button
+        	android:id="@+id/square9"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_toRightOf="@+id/square8"
+        	android:layout_alignParentBottom="true"
+        	android:background="@drawable/br_brown"
+        	android:onClick="square9Clicked"
         	android:soundEffectsEnabled="false"/>
     
    	</RelativeLayout>
@@ -199,7 +248,7 @@
         				android:soundEffectsEnabled="false"/>       
     			</LinearLayout>
     			
-        	    <LinearLayout 
+				<LinearLayout 
         	        android:id="@+id/buttons2_layout"
         			android:layout_width="match_parent"
         			android:layout_height="wrap_content"
@@ -246,7 +295,7 @@
         			android:soundEffectsEnabled="false"/>
         	    
         	    </LinearLayout>
-    			
+        	    
         	    <TextView
         	        android:id="@+id/leaderboards_message"
         	        android:layout_width="wrap_content"

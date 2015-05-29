@@ -33,17 +33,17 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.jchingdev.squares.singleplayer.MainActivity"
+            android:name="com.jchingdev.squares.singleplayer.MainActivityNormal"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.jchingdev.squares.singleplayer.MainActivity2"
+            android:name="com.jchingdev.squares.singleplayer.MainActivityHard"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.jchingdev.squares.singleplayer.MainActivity3"
+            android:name="com.jchingdev.squares.singleplayer.MainActivityInsane"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>

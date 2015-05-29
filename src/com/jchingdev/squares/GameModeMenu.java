@@ -1,8 +1,8 @@
 package com.jchingdev.squares;
 
-import com.jchingdev.squares.singleplayer.MainActivity;
-import com.jchingdev.squares.singleplayer.MainActivity2;
-import com.jchingdev.squares.singleplayer.MainActivity3;
+import com.jchingdev.squares.singleplayer.MainActivityNormal;
+import com.jchingdev.squares.singleplayer.MainActivityHard;
+import com.jchingdev.squares.singleplayer.MainActivityInsane;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -63,7 +63,7 @@ public class GameModeMenu extends FragmentActivity {
 		if (storage.getBoolean("volume",true)){
 			clickSound.start();
 		}
-		Intent intent = new Intent(this, MainActivity.class);
+		Intent intent = new Intent(this, MainActivityNormal.class);
 		finish();
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -74,7 +74,7 @@ public class GameModeMenu extends FragmentActivity {
 		if (storage.getBoolean("volume",true)){
 			clickSound.start();
 		}
-		Intent intent = new Intent(this, MainActivity2.class);
+		Intent intent = new Intent(this, MainActivityHard.class);
 		finish();
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -85,7 +85,7 @@ public class GameModeMenu extends FragmentActivity {
 		if (storage.getBoolean("volume",true)){
 			clickSound.start();
 		}
-		Intent intent = new Intent(this, MainActivity3.class);
+		Intent intent = new Intent(this, MainActivityInsane.class);
 		finish();
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);

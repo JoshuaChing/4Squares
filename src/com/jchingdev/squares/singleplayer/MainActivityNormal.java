@@ -40,7 +40,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends BaseGameActivity {
+public class MainActivityNormal extends BaseGameActivity {
 	
 	//dimension variables
 	private float density;
@@ -80,7 +80,7 @@ public class MainActivity extends BaseGameActivity {
 				getResources().getString(R.string.chartboost_app_signature));
 		Chartboost.onCreate(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main_normal);
 		Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		//disable automatic signup to google play
 		getGameHelper().setMaxAutoSignInAttempts(0);
