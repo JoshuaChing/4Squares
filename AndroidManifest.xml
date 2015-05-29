@@ -15,11 +15,12 @@
         android:targetSdkVersion="22" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+
         <!-- This meta-data tag is required to use Google Play Services. -->
         <meta-data
             android:name="com.google.android.gms.version"
@@ -33,17 +34,17 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.jchingdev.squares.singleplayer.MainActivityNormal"
+            android:name=".singleplayer.MainActivityNormal"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.jchingdev.squares.singleplayer.MainActivityHard"
+            android:name=".singleplayer.MainActivityHard"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.jchingdev.squares.singleplayer.MainActivityInsane"
+            android:name=".singleplayer.MainActivityInsane"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
@@ -64,6 +65,11 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".GameModeMenu"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MultiplayerMenu"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>

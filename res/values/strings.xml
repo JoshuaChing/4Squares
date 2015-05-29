@@ -4,7 +4,7 @@
     <string name="app_name">4 Squares</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_menu">MainMenu</string>
-    
+
     <!-- GAME -->
     <string name="defaultScore">0</string>
     <string name="defaultTimer">30.00</string>
@@ -21,20 +21,19 @@
 
     <!-- MENU -->
     <string name="title">4 SQUARES</string>
-    <string name="play">PLAY</string>
+    <string name="play">SOLO PLAY</string>
+    <string name="multiplayerPlay">ONLINE PLAY</string>
     <string name="leaderboards">LEADERBOARDS</string>
     <string name="copyright">© JOSHUA CHING 2014</string>
     <string name="volumeCD">volume</string>
     <string name="back">BACK</string>
-    
     <string name="gameModeTitle">GAME MODES</string>
     <string name="classicMode">NORMAL</string>
     <string name="challengeMode">HARD</string>
     <string name="insaneMode">INSANE</string>
-    
+
     <!-- COLOR -->
     <color name="navy">#2c3e50</color>
-    
     <color name="red">#e64c3c</color>
     <color name="red_press">#c0392b</color>
     <color name="yellow">#f1c40f</color>
@@ -56,7 +55,6 @@
     <color name="black">#000000</color>
     <color name="pink">#FF7BDE</color>
     <color name="pink_press">#CF64B4</color>
-    
     <color name="red2">#E85E50</color>
     <color name="red3">#EA6E62</color>
     <color name="red4">#EC7C72</color>
@@ -69,24 +67,23 @@
     <color name="blue2">#48A2DF</color>
     <color name="blue3">#5AABE2</color>
     <color name="blue4">#6AB3E5</color>
-    
     <color name="cloud">#ffffff</color>
     <color name="cloud_dark">#ecf0f1</color>
     <color name="black_trans50">#80000000</color>
     <color name="transparent">#00000000</color>
-   	<color name="red_signout">#dd4b39</color>
+    <color name="red_signout">#dd4b39</color>
 
     <!-- ADMOB -->
-	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-	
-	<!-- CHARTBOOST -->
-	<string name="chartboost_app_id"></string>
-	<string name="chartboost_app_signature"></string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
-	<!-- GOOGLE PLAY SERVICES -->
-	<string name="app_id">1234567890</string>
-	<string name="classic_leaderboard">abcdefg1234567</string>
-	<string name="challenge_leaderboard">abcdefg1234567</string>
-	<string name="insane_leaderboard">abcdefg1234567</string>
+    <!-- CHARTBOOST -->
+    <string name="chartboost_app_id"></string>
+    <string name="chartboost_app_signature"></string>
+
+    <!-- GOOGLE PLAY SERVICES -->
+    <string name="app_id">1234567890</string>
+    <string name="classic_leaderboard">abcdefg1234567</string>
+    <string name="challenge_leaderboard">abcdefg1234567</string>
+    <string name="insane_leaderboard">abcdefg1234567</string>
 
 </resources>

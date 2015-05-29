@@ -75,6 +75,16 @@ public class MainMenu extends BaseGameActivity implements View.OnClickListener{
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 	
+	//multiplayer play button clicked
+	public void multiplayerPlayClicked(View view){
+		if (storage.getBoolean("volume",true)){
+			clickSound.start();
+		}
+		Intent intent = new Intent(this, MultiplayerMenu.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+	}
+	
 	//display correct volume button image
 	private void displayVolumeImage(){
 		if (storage.getBoolean("volume",true)){
