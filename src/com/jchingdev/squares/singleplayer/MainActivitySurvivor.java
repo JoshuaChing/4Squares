@@ -52,10 +52,12 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	private TextView timerView;
 	private TextView preGameTimerView;
 	private Button answerButton;
+	private Button boostButton;
 	private RelativeLayout gameOverView;
 	private TextView leaderboardsMessage;
 	private TextView endScoreView;
 	private TextView bestScoreView;
+	private TextView streakView;
 	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
 	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
 	private Random random;
@@ -71,6 +73,8 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	private int health;
 	private int healthDropRate;
 	private int healthDropCounter;
+	private int streak;
+	private boolean isGameOver;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +101,13 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	    endScoreView = (TextView)findViewById(R.id.endScore);
 	    bestScoreView = (TextView)findViewById(R.id.bestScore);
 	    preGameTimerView = (TextView)findViewById(R.id.preGameTimer);
+	    streakView = (TextView)findViewById(R.id.streak);
 	    square1 = (Button)findViewById(R.id.square1);
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
 		square4 = (Button)findViewById(R.id.square4);
 		answerButton = (Button)findViewById(R.id.answer);
+		boostButton = (Button)findViewById(R.id.boost);
 		gameOverView = (RelativeLayout)findViewById(R.id.gameOverView);
 		leaderboardsMessage = (TextView)findViewById(R.id.leaderboards_message);
 	    //calculate and set square dimensions
@@ -129,8 +135,10 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		score = 0;
 		health = 50;
 		healthBar.setProgress(health);
-		healthDropRate = 150;
+		healthDropRate = 110;
 		healthDropCounter = 0;
+		streak = 0;
+		isGameOver = false;
 		startPreGameTimer();
 	}
 
@@ -327,6 +335,9 @@ public class MainActivitySurvivor extends BaseGameActivity {
 			score++;
 			scoreView.setText(String.valueOf(score));
 			
+			//streak
+			manageStreak();
+			
 			//add health
 			if(health<100){
 				health++;
@@ -340,14 +351,36 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		}
 	}
 	
+	//function to manage streak
+	private void manageStreak(){
+		streak++;
+		if(streak > 1){
+			streakView.setText("x"+String.valueOf(streak));
+			streakView.setVisibility(View.VISIBLE);
+		}
+		if(streak > 9){
+			boostButton.setVisibility(View.VISIBLE);
+			streakView.setTextColor(getResources().getColor(R.color.purple));
+		}else{
+			boostButton.setVisibility(View.INVISIBLE);
+			streakView.setTextColor(getResources().getColor(R.color.health_bar));
+		}
+	}
+	
 	//function for when wrong answer picked
 	private void wrongAnswer(){
+		boostButton.setVisibility(View.INVISIBLE);
+		streak = 0;
+		streakView.setVisibility(View.INVISIBLE);
+		streakView.setTextColor(getResources().getColor(R.color.health_bar));
+		
 		final View cover = (View)findViewById(R.id.wrongAnswer);
 		cover.setBackgroundResource(R.color.red_trans60);
 		square1.setEnabled(false);
 		square2.setEnabled(false);
 		square3.setEnabled(false);
 		square4.setEnabled(false);
+		boostButton.setEnabled(false);
 		timer = new CountDownTimer(3000, 100) {
 		     public void onTick(long millisUntilFinished) {}
 
@@ -357,6 +390,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		 		 square2.setEnabled(true);
 		 		 square3.setEnabled(true);
 		 		 square4.setEnabled(true);
+		 		 boostButton.setEnabled(true);
 		     }
 		  }.start();
 	}
@@ -384,7 +418,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		ScaleAnimation animation = new ScaleAnimation(1.0f, 1.25f, 1.0f, 1.25f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 		animation.setRepeatCount(1);
 		animation.setRepeatMode(Animation.REVERSE);
-		animation.setDuration(500);
+		animation.setDuration(400);
 		
 		animation.setAnimationListener(new Animation.AnimationListener(){
 
@@ -418,6 +452,9 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		healthBar.setProgress(health);
 		
 		if(health <= 0){
+			isGameOver = true;
+			//play wrong sound
+			playWrongSound();
 			timer.cancel();
 			gameOver();
 		}
@@ -425,15 +462,18 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	
 	//start timer object
 	private void startTimer(){
+		isGameOver=false;
 		timer = new CountDownTimer(10000, 10) {
 		     public void onTick(long millisUntilFinished) {
-		         timerView.setText(String.valueOf(new DecimalFormat("##.##").format((millisUntilFinished/1000.0))));
-		         calculateHealth();
+		    	 if(!isGameOver){
+		    		 timerView.setText(String.valueOf(new DecimalFormat("##.##").format((millisUntilFinished/1000.0))));
+		    		 calculateHealth();
+		    	 }
 		     }
 
 		     public void onFinish() {
 		    	 timerView.setText("0.00");
-		    	 if(health>0){
+		    	 if(!isGameOver){
 		    		 speedUp();
 		    		 this.start();
 		    	 }
@@ -454,6 +494,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		 		 square2.setEnabled(true);
 		 		 square3.setEnabled(true);
 		 		 square4.setEnabled(true);
+		 		 boostButton.setEnabled(true);
 		    	 preGameTimerView.setVisibility(View.GONE);
 		    	 startTimer();
 		     }
@@ -478,6 +519,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		answerButton.setEnabled(false);
+		boostButton.setEnabled(false);
 		bestScore = storage.getInt("bestScoreSurvivor",0);
 		if (score > bestScore){
 			bestScore = score;
@@ -509,6 +551,22 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		}
 	}
 	
+	//boost button clicked
+	public void boostClicked(View view){
+		playClickSound();
+		boostButton.setVisibility(View.INVISIBLE);
+		streakView.setVisibility(View.INVISIBLE);
+		int base = streak/2;
+		int bonus = (streak/10)*5;
+		health += base + bonus;
+		score += base + bonus;
+		scoreView.setText(String.valueOf(score));
+		if(health>=100)
+			health = 100;
+		healthBar.setProgress(health);
+		streak = 0;
+	}
+	
 	//retry button clicked
 	public void retryClicked(View view){
 		playClickSound();
@@ -523,6 +581,11 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		healthBar.setProgress(health);
 		healthDropRate = 150;
 		healthDropCounter = 0;
+		streak = 0;
+		streakView.setTextColor(getResources().getColor(R.color.health_bar));
+		streakView.setVisibility(View.INVISIBLE);
+		boostButton.setVisibility(View.INVISIBLE);
+		findViewById(R.id.wrongAnswer).setBackgroundResource(R.color.transparent);
 		//reset squares
 		for (int i = 0; i < 4; i++){
 			squares[i] = i;

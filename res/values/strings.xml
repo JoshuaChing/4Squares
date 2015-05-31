@@ -19,6 +19,7 @@
     <string name="defaultPreGameTimer">3</string>
     <string name="leaderboards_message">*Sign into Google Play to submit your scores to the leaderboards!</string>
     <string name="speedUp">SPEED UP!</string>
+    <string name="boost">BOOST</string>
 
     <!-- MENU -->
     <string name="title">4 SQUARES</string>
@@ -74,9 +75,10 @@
     <color name="black_trans50">#80000000</color>
     <color name="transparent">#00000000</color>
     <color name="red_signout">#dd4b39</color>
-    <color name="health_bar">#007A00</color>
+    <color name="health_bar">#ecf0f1</color>
     <color name="health_bar_back">#303030</color>
     <color name="red_trans60">#80FF0000</color>
+    <color name="cyan">#00CCCC</color>
 
     <!-- ADMOB -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>

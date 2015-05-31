@@ -34,8 +34,7 @@
         android:textColor="@color/cloud"
         android:textSize="40sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="10dp"/>
+        android:layout_centerHorizontal="true"/>
     
     <ProgressBar
     	android:id="@+id/healthBar"
@@ -46,8 +45,23 @@
     	android:progressDrawable="@drawable/health_bar"
     	android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"/>
     
+    <Button
+        android:id="@+id/boost"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/m_purple"
+        android:text="@string/boost"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:onClick="boostClicked"
+        android:textSize="18sp"
+        android:layout_below="@+id/healthBar"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"/>
     
     <RelativeLayout
+        android:paddingLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -58,10 +72,11 @@
         	android:layout_height="wrap_content"
         	android:layout_width="wrap_content"
         	android:layout_above="@+id/answer"
-        	android:textColor="@color/cloud"
+        	android:textColor="@color/cyan"
         	android:textSize="40sp"
+        	android:textStyle="bold"
         	android:layout_centerHorizontal="true"
-        	android:layout_marginBottom="40dp"
+        	android:layout_marginBottom="35dp"
         	android:text="@string/speedUp"
         	android:visibility="invisible"/>
         
@@ -79,6 +94,19 @@
         	android:layout_marginTop="0dp"
         	android:layout_marginBottom="40dp"
         	android:enabled="false"/>
+        
+        <TextView
+            android:id="@+id/streak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="-20dp"
+            android:layout_marginRight="-20dp"
+            android:layout_alignRight="@+id/answer"
+            android:layout_above="@+id/answer"
+            android:textColor="@color/health_bar"
+            android:visibility="invisible"/>
         		
     	<Button
         	android:id="@+id/square1"
