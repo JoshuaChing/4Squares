@@ -465,6 +465,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		isGameOver=false;
 		timer = new CountDownTimer(10000, 10) {
 		     public void onTick(long millisUntilFinished) {
+		 		System.out.println(healthDropCounter +":"+ healthDropRate);
 		    	 if(!isGameOver){
 		    		 timerView.setText(String.valueOf(new DecimalFormat("##.##").format((millisUntilFinished/1000.0))));
 		    		 calculateHealth();
@@ -579,7 +580,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		scoreView.setText("0");
 		health = 50;
 		healthBar.setProgress(health);
-		healthDropRate = 150;
+		healthDropRate = 110;
 		healthDropCounter = 0;
 		streak = 0;
 		streakView.setTextColor(getResources().getColor(R.color.health_bar));
@@ -650,6 +651,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		if(Chartboost.onBackPressed()){
 			return;
 		}else{
+			timer.cancel();
 			Intent intent = new Intent(this, GameModeMenu.class);
 			finish();
 			startActivity(intent);
@@ -707,6 +709,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	@Override
 	public void onDestroy() {
 	    super.onDestroy();
+	    timer.cancel();
 	    Chartboost.onDestroy(this);
 	}
 	
