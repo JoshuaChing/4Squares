@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/navy"
+    android:background="@color/black"
     android:animateLayoutChanges="true"
-    tools:context="com.jchingdev.squares.singleplayer.MainActivityInsane" >
+    tools:context="com.jchingdev.squares.singleplayer.MainActivityNormal" >
      
     <!-- GAMEPLAY -->
     
@@ -23,7 +23,8 @@
         android:textSize="40sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"/>
     
     <TextView
         android:id="@+id/score"
@@ -33,8 +34,18 @@
         android:textColor="@color/cloud"
         android:textSize="40sp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginRight="10dp"/>
+    
+    <ProgressBar
+    	android:id="@+id/healthBar"
+    	android:layout_height="30dp"
+    	android:layout_width="fill_parent"
+    	android:layout_below="@+id/score"
+    	android:indeterminateOnly="false"
+    	android:progressDrawable="@drawable/health_bar"
+    	android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"/>
+    
     
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -42,26 +53,39 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp">
         
+        <TextView
+        	android:id="@+id/speedUp"
+        	android:layout_height="wrap_content"
+        	android:layout_width="wrap_content"
+        	android:layout_above="@+id/answer"
+        	android:textColor="@color/cloud"
+        	android:textSize="40sp"
+        	android:layout_centerHorizontal="true"
+        	android:layout_marginBottom="40dp"
+        	android:text="@string/speedUp"
+        	android:visibility="invisible"/>
+        
         <Button
         	android:id="@+id/answer"
         	android:layout_width="100dp"
         	android:layout_height="40dp"
-        	android:background="@drawable/m_red"
+        	android:background="@drawable/yellow_square"
         	android:text="@string/gamePrompt"
         	android:textColor="@color/cloud"
         	android:textStyle="bold"
         	android:onClick="answerClicked"
         	android:textSize="18sp"
         	android:layout_above="@+id/square1"
-        	android:layout_marginBottom="60dp"
+        	android:layout_marginTop="0dp"
+        	android:layout_marginBottom="40dp"
         	android:enabled="false"/>
         		
     	<Button
         	android:id="@+id/square1"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
-        	android:layout_above="@+id/square5"
-        	android:background="@drawable/m_red"
+        	android:layout_above="@+id/square3"
+        	android:background="@drawable/tl_red"
         	android:onClick="square1Clicked"
         	android:soundEffectsEnabled="false"/>
     
@@ -70,148 +94,30 @@
         	android:layout_width="50dp"
         	android:layout_height="50dp"
         	android:layout_toRightOf="@+id/square1"
-        	android:layout_above="@+id/square6"
-        	android:background="@drawable/m_red2"
+        	android:layout_above="@+id/square3"
+        	android:background="@drawable/tr_yellow"
         	android:onClick="square2Clicked"
         	android:soundEffectsEnabled="false"/>
-    	
-    	<Button
+    
+   		<Button
         	android:id="@+id/square3"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square2"
-        	android:layout_above="@+id/square7"
-        	android:background="@drawable/m_red3"
+        	android:layout_alignParentBottom="true"
+       		android:background="@drawable/bl_green"
         	android:onClick="square3Clicked"
         	android:soundEffectsEnabled="false"/>
-    	
+    
     	<Button
         	android:id="@+id/square4"
         	android:layout_width="50dp"
         	android:layout_height="50dp"
         	android:layout_toRightOf="@+id/square3"
-        	android:layout_above="@+id/square8"
-        	android:background="@drawable/m_red4"
+        	android:layout_alignParentBottom="true"
+        	android:background="@drawable/br_blue"
         	android:onClick="square4Clicked"
         	android:soundEffectsEnabled="false"/>
-    	
-    	<Button
-        	android:id="@+id/square5"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_above="@+id/square9"
-        	android:background="@drawable/m_yellow"
-        	android:onClick="square5Clicked"
-        	android:soundEffectsEnabled="false"/>
-    	
-    	<Button
-        	android:id="@+id/square6"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square5"
-        	android:layout_above="@+id/square10"
-        	android:background="@drawable/m_yellow2"
-        	android:onClick="square6Clicked"
-        	android:soundEffectsEnabled="false"/>
     
-   		<Button
-        	android:id="@+id/square7"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square6"
-        	android:layout_above="@+id/square11"
-       		android:background="@drawable/m_yellow3"
-        	android:onClick="square7Clicked"
-        	android:soundEffectsEnabled="false"/>
-   		
-   		<Button
-        	android:id="@+id/square8"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_above="@+id/square12"
-        	android:layout_toRightOf="@+id/square7"
-       		android:background="@drawable/m_yellow4"
-        	android:onClick="square8Clicked"
-        	android:soundEffectsEnabled="false"/>
-    
-    	<Button
-        	android:id="@+id/square9"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_above="@+id/square13"
-        	android:background="@drawable/m_green"
-        	android:onClick="square9Clicked"
-        	android:soundEffectsEnabled="false"/>
-    	
-      	<Button
-        	android:id="@+id/square10"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square9"
-        	android:layout_above="@+id/square14"
-        	android:background="@drawable/m_green2"
-        	android:onClick="square10Clicked"
-        	android:soundEffectsEnabled="false"/>
-      	
-       <Button
-        	android:id="@+id/square11"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square10"
-        	android:layout_above="@+id/square15"
-        	android:background="@drawable/m_green3"
-        	android:onClick="square11Clicked"
-        	android:soundEffectsEnabled="false"/>  
-    
-      <Button
-        	android:id="@+id/square12"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square11"
-        	android:layout_above="@+id/square16"
-        	android:background="@drawable/m_green4"
-        	android:onClick="square12Clicked"
-        	android:soundEffectsEnabled="false"/>
-      
-     <Button
-        	android:id="@+id/square13"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_alignParentBottom="true"
-        	android:background="@drawable/m_blue"
-        	android:onClick="square13Clicked"
-        	android:soundEffectsEnabled="false"/>
-     
-     <Button
-        	android:id="@+id/square14"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square13"
-        	android:layout_alignParentBottom="true"
-        	android:background="@drawable/m_blue2"
-        	android:onClick="square14Clicked"
-        	android:soundEffectsEnabled="false"/>
-     
-     <Button
-        	android:id="@+id/square15"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square14"
-        	android:layout_alignParentBottom="true"
-        	android:background="@drawable/m_blue3"
-        	android:onClick="square15Clicked"
-        	android:soundEffectsEnabled="false"/>
-     
-     <Button
-        	android:id="@+id/square16"
-        	android:layout_width="50dp"
-        	android:layout_height="50dp"
-        	android:layout_toRightOf="@+id/square15"
-        	android:layout_alignParentBottom="true"
-        	android:background="@drawable/m_blue4"
-        	android:onClick="square16Clicked"
-        	android:soundEffectsEnabled="false"/>  
-       
    	</RelativeLayout>
    	
      <!-- PRE GAMEPLAY -->
@@ -224,6 +130,13 @@
         android:textSize="100sp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
+    
+    <!-- WRONG ANSWER -->
+    <View
+        android:id="@+id/wrongAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"/>
     
     <!-- GAME OVER -->
     <RelativeLayout
@@ -239,7 +152,7 @@
         	    android:layout_centerHorizontal="true"
         	    android:layout_centerVertical="true"
         	    android:padding="40dp"
-        	    android:background="@drawable/navy_container"
+        	    android:background="@drawable/black_container"
         	    android:layout_margin="20dp">
         	    
         	    <TextView
@@ -317,7 +230,7 @@
         				android:soundEffectsEnabled="false"/>       
     			</LinearLayout>
     			
-				<LinearLayout 
+        	    <LinearLayout 
         	        android:id="@+id/buttons2_layout"
         			android:layout_width="match_parent"
         			android:layout_height="wrap_content"
@@ -364,7 +277,7 @@
         			android:soundEffectsEnabled="false"/>
         	    
         	    </LinearLayout>
-        	    
+    			
         	    <TextView
         	        android:id="@+id/leaderboards_message"
         	        android:layout_width="wrap_content"

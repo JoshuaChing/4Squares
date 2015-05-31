@@ -9,14 +9,6 @@ import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.jchingdev.squares.GameModeMenu;
 import com.jchingdev.squares.R;
-import com.jchingdev.squares.R.anim;
-import com.jchingdev.squares.R.drawable;
-import com.jchingdev.squares.R.id;
-import com.jchingdev.squares.R.layout;
-import com.jchingdev.squares.R.menu;
-import com.jchingdev.squares.R.raw;
-import com.jchingdev.squares.R.string;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;

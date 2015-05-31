@@ -60,7 +60,8 @@
         android:textSize="18sp"
         android:padding="15dp"
         android:onClick="multiplayerPlayClicked"
-        android:soundEffectsEnabled="false"/>
+        android:soundEffectsEnabled="false"
+        android:visibility="gone"/>
     
     <Button
         android:id="@+id/leaderboards"

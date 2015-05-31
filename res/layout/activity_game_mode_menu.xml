@@ -27,7 +27,7 @@
         
      <TextView
        	android:id="@+id/bestScoreClassic"
-       	android:layout_below="@+id/challenge"
+       	android:layout_below="@+id/title"
        	android:layout_alignLeft="@+id/classic"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
     
     <TextView
        	android:id="@+id/bestScoreChallenge"
-       	android:layout_below="@+id/insane"
+       	android:layout_below="@+id/classic"
        	android:layout_alignLeft="@+id/challenge"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
     
     <TextView
        	android:id="@+id/bestScoreInsane"
-       	android:layout_below="@+id/title"
+       	android:layout_below="@+id/challenge"
        	android:layout_alignLeft="@+id/challenge"
        	android:layout_width="wrap_content"
      	android:layout_height="wrap_content"
@@ -112,9 +112,38 @@
         android:onClick="insaneClicked"
         android:soundEffectsEnabled="false"/>
     
+    <TextView
+       	android:id="@+id/bestScoreSurvivor"
+       	android:layout_below="@+id/insane"
+       	android:layout_alignLeft="@+id/challenge"
+       	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+       	android:text="@string/bestScore"
+       	android:textColor="@color/cloud"
+       	android:textStyle="bold"
+       	android:textSize="18sp">
+	</TextView>   
+    
+    <Button
+        android:id="@+id/survivor"
+        android:layout_below="@+id/bestScoreSurvivor"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/survivorMode"
+        android:background="@drawable/gray_button"
+        android:textColor="@color/cloud"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:onClick="survivorClicked"
+        android:soundEffectsEnabled="false"/>
+    
     <Button
         android:id="@+id/back"
-        android:layout_below="@+id/classic"
+        android:layout_below="@+id/survivor"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"

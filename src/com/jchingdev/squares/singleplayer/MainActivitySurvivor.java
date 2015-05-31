@@ -4,11 +4,12 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 
-import com.chartboost.sdk.*;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.jchingdev.squares.GameModeMenu;
 import com.jchingdev.squares.R;
+import com.chartboost.sdk.*;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -27,11 +28,14 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivityInsane extends BaseGameActivity {
+public class MainActivitySurvivor extends BaseGameActivity {
 	
 	//dimension variables
 	private float density;
@@ -39,22 +43,11 @@ public class MainActivityInsane extends BaseGameActivity {
 	private double squareSize;
 	
 	//game views
+	private ProgressBar healthBar;
 	private Button square1;
 	private Button square2;
 	private Button square3;
 	private Button square4;
-	private Button square5;
-	private Button square6;
-	private Button square7;
-	private Button square8;
-	private Button square9;
-	private Button square10;
-	private Button square11;
-	private Button square12;
-	private Button square13;
-	private Button square14;
-	private Button square15;
-	private Button square16;
 	private TextView scoreView;
 	private TextView timerView;
 	private TextView preGameTimerView;
@@ -63,9 +56,8 @@ public class MainActivityInsane extends BaseGameActivity {
 	private TextView leaderboardsMessage;
 	private TextView endScoreView;
 	private TextView bestScoreView;
-	
-	//game variables
-	private int[] squares = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}; //squares that user see, will be shuffled
+	//game variables, 0 = red, 1 = yellow, 2 = green, 3 = blue
+	private int[] squares = {0,1,2,3}; //squares that user see, will be shuffled
 	private Random random;
 	private int answer;
 	private int score;
@@ -76,6 +68,9 @@ public class MainActivityInsane extends BaseGameActivity {
 	private MediaPlayer clickSound;
 	private MediaPlayer wrongSound;
 	private boolean volume;
+	private int health;
+	private int healthDropRate;
+	private int healthDropCounter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +79,7 @@ public class MainActivityInsane extends BaseGameActivity {
 				getResources().getString(R.string.chartboost_app_signature));
 		Chartboost.onCreate(this);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_insane);
+		setContentView(R.layout.activity_main_survivor);
 		Chartboost.cacheInterstitial(CBLocation.LOCATION_DEFAULT);
 		//disable automatic signup to google play
 		getGameHelper().setMaxAutoSignInAttempts(0);
@@ -96,6 +91,7 @@ public class MainActivityInsane extends BaseGameActivity {
 	    density  = getResources().getDisplayMetrics().density;
 	    dpWidth  = outMetrics.widthPixels / density;
 	    //find game views
+	    healthBar = (ProgressBar)findViewById(R.id.healthBar);
 	    scoreView = (TextView)findViewById(R.id.score);
 	    timerView = (TextView)findViewById(R.id.timer);
 	    endScoreView = (TextView)findViewById(R.id.endScore);
@@ -105,57 +101,21 @@ public class MainActivityInsane extends BaseGameActivity {
 		square2 = (Button)findViewById(R.id.square2);
 		square3 = (Button)findViewById(R.id.square3);
 		square4 = (Button)findViewById(R.id.square4);
-		square5 = (Button)findViewById(R.id.square5);
-		square6 = (Button)findViewById(R.id.square6);
-		square7 = (Button)findViewById(R.id.square7);
-		square8 = (Button)findViewById(R.id.square8);
-		square9 = (Button)findViewById(R.id.square9);
-		square10 = (Button)findViewById(R.id.square10);
-		square11 = (Button)findViewById(R.id.square11);
-		square12 = (Button)findViewById(R.id.square12);
-		square13 = (Button)findViewById(R.id.square13);
-		square14 = (Button)findViewById(R.id.square14);
-		square15 = (Button)findViewById(R.id.square15);
-		square16 = (Button)findViewById(R.id.square16);
 		answerButton = (Button)findViewById(R.id.answer);
 		gameOverView = (RelativeLayout)findViewById(R.id.gameOverView);
 		leaderboardsMessage = (TextView)findViewById(R.id.leaderboards_message);
 	    //calculate and set square dimensions
-	    squareSize = (dpWidth-80)/4.0;
+	    squareSize = (dpWidth-80)/2.0;
 		setSquareSize(square1, (int)squareSize, (int)squareSize);
 		setSquareSize(square2, (int)squareSize, (int)squareSize);
 		setSquareSize(square3, (int)squareSize, (int)squareSize);
 		setSquareSize(square4, (int)squareSize, (int)squareSize);
-		setSquareSize(square5, (int)squareSize, (int)squareSize);
-		setSquareSize(square6, (int)squareSize, (int)squareSize);
-		setSquareSize(square7, (int)squareSize, (int)squareSize);
-		setSquareSize(square8, (int)squareSize, (int)squareSize);
-		setSquareSize(square9, (int)squareSize, (int)squareSize);
-		setSquareSize(square10, (int)squareSize, (int)squareSize);
-		setSquareSize(square11, (int)squareSize, (int)squareSize);
-		setSquareSize(square12, (int)squareSize, (int)squareSize);
-		setSquareSize(square13, (int)squareSize, (int)squareSize);
-		setSquareSize(square14, (int)squareSize, (int)squareSize);
-		setSquareSize(square15, (int)squareSize, (int)squareSize);
-		setSquareSize(square16, (int)squareSize, (int)squareSize);
-		setSquareSize(answerButton,(int)squareSize*4,(int)((dpWidth-80)/4.0));
+		setSquareSize(answerButton,(int)squareSize*2,(int)squareSize/2);
 		//disable buttons
 		square1.setEnabled(false);
 		square2.setEnabled(false);
 		square3.setEnabled(false);
 		square4.setEnabled(false);
-		square5.setEnabled(false);
-		square6.setEnabled(false);
-		square7.setEnabled(false);
-		square8.setEnabled(false);
-		square9.setEnabled(false);
-		square10.setEnabled(false);
-		square11.setEnabled(false);
-		square12.setEnabled(false);
-		square13.setEnabled(false);
-		square14.setEnabled(false);
-		square15.setEnabled(false);
-		square16.setEnabled(false);
 		//set up sounds
 		clickSound = MediaPlayer.create(getBaseContext(), R.raw.click);
 		wrongSound = MediaPlayer.create(getBaseContext(), R.raw.wrong);
@@ -164,9 +124,13 @@ public class MainActivityInsane extends BaseGameActivity {
 		storageEdit= storage.edit();
 		volume = storage.getBoolean("volume", true);
 		random = new Random();
-		answer = random.nextInt(16);
-		setSquareColourM(answer,answerButton);
+		answer = random.nextInt(4);
+		setSquareColour(answer,answerButton);
 		score = 0;
+		health = 50;
+		healthBar.setProgress(health);
+		healthDropRate = 150;
+		healthDropCounter = 0;
 		startPreGameTimer();
 	}
 
@@ -240,150 +204,220 @@ public class MainActivityInsane extends BaseGameActivity {
 		checkAnswer(3);
 	}
 	
-	public void square5Clicked(View view){
-		checkAnswer(4);
-	}
-	
-	public void square6Clicked(View view){
-		checkAnswer(5);
-	}
-	
-	public void square7Clicked(View view){
-		checkAnswer(6);
-	}
-	
-	public void square8Clicked(View view){
-		checkAnswer(7);
-	}
-	
-	public void square9Clicked(View view){
-		checkAnswer(8);
-	}
-	
-	public void square10Clicked(View view){
-		checkAnswer(9);
-	}
-	
-	public void square11Clicked(View view){
-		checkAnswer(10);
-	}
-	
-	public void square12Clicked(View view){
-		checkAnswer(11);
-	}
-	
-	public void square13Clicked(View view){
-		checkAnswer(12);
-	}
-	
-	public void square14Clicked(View view){
-		checkAnswer(13);
-	}
-	
-	public void square15Clicked(View view){
-		checkAnswer(14);
-	}
-	
-	public void square16Clicked(View view){
-		checkAnswer(15);
-	}
-	
-	//MID set square colour
-	public void setSquareColourM(int i,Button b){
+	public void setSquareColour(int i,Button b){
 		switch (i){
 			case 0:
-				b.setBackgroundResource(R.drawable.m_red);
+				b.setBackgroundResource(R.drawable.red_square);
 				break;
 			case 1:
-				b.setBackgroundResource(R.drawable.m_red2);
+				b.setBackgroundResource(R.drawable.yellow_square);
 				break;
 			case 2:
-				b.setBackgroundResource(R.drawable.m_red3);
+				b.setBackgroundResource(R.drawable.green_square);
 				break;
 			case 3:
-				b.setBackgroundResource(R.drawable.m_red4);
-				break;
-			case 4:
-				b.setBackgroundResource(R.drawable.m_yellow);
-				break;
-			case 5:
-				b.setBackgroundResource(R.drawable.m_yellow2);
-				break;
-			case 6:
-				b.setBackgroundResource(R.drawable.m_yellow3);
-				break;
-			case 7:
-				b.setBackgroundResource(R.drawable.m_yellow4);
-				break;
-			case 8:
-				b.setBackgroundResource(R.drawable.m_green);
-				break;
-			case 9:
-				b.setBackgroundResource(R.drawable.m_green2);
-				break;
-			case 10:
-				b.setBackgroundResource(R.drawable.m_green3);
-				break;
-			case 11:
-				b.setBackgroundResource(R.drawable.m_green4);
-				break;
-			case 12:
-				b.setBackgroundResource(R.drawable.m_blue);
-				break;
-			case 13:
-				b.setBackgroundResource(R.drawable.m_blue2);
-				break;
-			case 14:
-				b.setBackgroundResource(R.drawable.m_blue3);
-				break;
-			case 15:
-				b.setBackgroundResource(R.drawable.m_blue4);
+				b.setBackgroundResource(R.drawable.blue_square);
 				break;
 			default:
-				b.setBackgroundResource(R.drawable.m_red);
+				b.setBackgroundResource(R.drawable.red_square);
 		}
 	}
+	
+	//TOP LEFT set square colour
+	public void setSquareColourTL(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.tl_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.tl_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.tl_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.tl_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.tl_red);
+		}
+	}
+	
+	//TOP RIGHT set square colour
+	public void setSquareColourTR(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.tr_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.tr_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.tr_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.tr_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.tr_red);
+		}
+	}
+	
+	//BOTTOM LEFT set square colour
+	public void setSquareColourBL(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.bl_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.bl_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.bl_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.bl_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.bl_red);
+		}
+	}
+	
+	//BOTTOM RIGHT set square colour
+	public void setSquareColourBR(int i,Button b){
+		switch (i){
+			case 0:
+				b.setBackgroundResource(R.drawable.br_red);
+				break;
+			case 1:
+				b.setBackgroundResource(R.drawable.br_yellow);
+				break;
+			case 2:
+				b.setBackgroundResource(R.drawable.br_green);
+				break;
+			case 3:
+				b.setBackgroundResource(R.drawable.br_blue);
+				break;
+			default:
+				b.setBackgroundResource(R.drawable.br_red);
+		}
+	}	
 		
 	//called when square is clicked
 	//where answer is the correct answer for the current round
 	//where input is the square the user clicked
-	//0 = red, 1 = orange, 2 = yellow, 3 = blue, 4 = turquoise, 5 = green, 6 = purple, 7 = pink, 8 = brown
+	//1 = r, 2 = y, 3 = g, 4 = b
 	private void checkAnswer(int input){
 		//if user gets the correct answer
 		if (squares[input] == answer){
 	        playClickSound();
 			
 			//set new answer
-			answer = random.nextInt(16);		//new answer
-			setSquareColourM(answer,answerButton);
+			answer = random.nextInt(4);		//new answer
+			setSquareColour(answer,answerButton);
 			
 			//change new colours of squares
 			shuffleArray(squares);
-			setSquareColourM(squares[0],square1);
-			setSquareColourM(squares[1],square2);
-			setSquareColourM(squares[2],square3);
-			setSquareColourM(squares[3],square4);
-			setSquareColourM(squares[4],square5);
-			setSquareColourM(squares[5],square6);
-			setSquareColourM(squares[6],square7);
-			setSquareColourM(squares[7],square8);
-			setSquareColourM(squares[8],square9);
-			setSquareColourM(squares[9],square10);
-			setSquareColourM(squares[10],square11);
-			setSquareColourM(squares[11],square12);
-			setSquareColourM(squares[12],square13);
-			setSquareColourM(squares[13],square14);
-			setSquareColourM(squares[14],square15);
-			setSquareColourM(squares[15],square16);
+			setSquareColourTL(squares[0],square1);
+			setSquareColourTR(squares[1],square2);
+			setSquareColourBL(squares[2],square3);
+			setSquareColourBR(squares[3],square4);
 			
 			//set new score
 			score++;
 			scoreView.setText(String.valueOf(score));
+			
+			//add health
+			if(health<100){
+				health++;
+			}
+			healthBar.setProgress(health);
 
 		}
 		else{
 	        playWrongSound();
-			
+	        wrongAnswer();
+		}
+	}
+	
+	//function for when wrong answer picked
+	private void wrongAnswer(){
+		final View cover = (View)findViewById(R.id.wrongAnswer);
+		cover.setBackgroundResource(R.color.red_trans60);
+		square1.setEnabled(false);
+		square2.setEnabled(false);
+		square3.setEnabled(false);
+		square4.setEnabled(false);
+		timer = new CountDownTimer(3000, 100) {
+		     public void onTick(long millisUntilFinished) {}
+
+		     public void onFinish() {
+		    	 cover.setBackgroundResource(R.color.transparent);
+		    	 square1.setEnabled(true);
+		 		 square2.setEnabled(true);
+		 		 square3.setEnabled(true);
+		 		 square4.setEnabled(true);
+		     }
+		  }.start();
+	}
+	
+	//speed up function
+	private void speedUp(){
+		if(healthDropRate > 1){
+			if (healthDropRate > 70)
+				healthDropRate -= 20;
+			else if (healthDropRate > 50)
+				healthDropRate -= 10;
+			else if(healthDropRate > 30)
+				healthDropRate -= 5;
+			else if (healthDropRate > 10)
+				healthDropRate -= 2;
+			else
+				healthDropRate --;
+			animateSpeedUp();
+		}
+	}
+	
+	//function to animate speedup text
+	private void animateSpeedUp(){
+		final TextView text = (TextView)findViewById(R.id.speedUp);
+		ScaleAnimation animation = new ScaleAnimation(1.0f, 1.25f, 1.0f, 1.25f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		animation.setRepeatCount(1);
+		animation.setRepeatMode(Animation.REVERSE);
+		animation.setDuration(500);
+		
+		animation.setAnimationListener(new Animation.AnimationListener(){
+
+			@Override
+			public void onAnimationStart(Animation animation) {
+				text.setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				text.setVisibility(View.INVISIBLE);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {}
+
+		});
+		
+		text.startAnimation(animation);
+	}
+	
+	//function to manage help
+	private void calculateHealth(){
+		if(healthDropCounter >= healthDropRate){
+			healthDropCounter = 0;
+			health--;
+		}else{
+			healthDropCounter++;
+		}
+		
+		healthBar.setProgress(health);
+		
+		if(health <= 0){
 			timer.cancel();
 			gameOver();
 		}
@@ -391,14 +425,18 @@ public class MainActivityInsane extends BaseGameActivity {
 	
 	//start timer object
 	private void startTimer(){
-		timer = new CountDownTimer(30000, 10) {
+		timer = new CountDownTimer(10000, 10) {
 		     public void onTick(long millisUntilFinished) {
 		         timerView.setText(String.valueOf(new DecimalFormat("##.##").format((millisUntilFinished/1000.0))));
+		         calculateHealth();
 		     }
 
 		     public void onFinish() {
 		    	 timerView.setText("0.00");
-		    	 gameOver();
+		    	 if(health>0){
+		    		 speedUp();
+		    		 this.start();
+		    	 }
 		     }
 		  }.start();
 	}
@@ -416,18 +454,6 @@ public class MainActivityInsane extends BaseGameActivity {
 		 		 square2.setEnabled(true);
 		 		 square3.setEnabled(true);
 		 		 square4.setEnabled(true);
-		 		 square5.setEnabled(true);
-		 		 square6.setEnabled(true);
-		 		 square7.setEnabled(true);
-		 		 square8.setEnabled(true);
-		 		 square9.setEnabled(true);
-		    	 square10.setEnabled(true);
-		 		 square11.setEnabled(true);
-		 		 square12.setEnabled(true);
-		 		 square13.setEnabled(true);
-		 		 square14.setEnabled(true);
-		 		 square15.setEnabled(true);
-		 		 square16.setEnabled(true);
 		    	 preGameTimerView.setVisibility(View.GONE);
 		    	 startTimer();
 		     }
@@ -451,17 +477,12 @@ public class MainActivityInsane extends BaseGameActivity {
 		square2.setEnabled(false);
 		square3.setEnabled(false);
 		square4.setEnabled(false);
-		square5.setEnabled(false);
-		square6.setEnabled(false);
-		square7.setEnabled(false);
-		square8.setEnabled(false);
-		square9.setEnabled(false);
 		answerButton.setEnabled(false);
-		bestScore = storage.getInt("bestScore4by4",0);
+		bestScore = storage.getInt("bestScoreSurvivor",0);
 		if (score > bestScore){
 			bestScore = score;
-			storageEdit.putInt("bestScore4by4",bestScore);
-			storageEdit.putBoolean("needSync4by4", true);
+			storageEdit.putInt("bestScoreSurvivor",bestScore);
+			storageEdit.putBoolean("needSyncSurvivor", true);
 			storageEdit.commit();
 		}
 		bestScoreView.setText("BEST: "+String.valueOf(bestScore));
@@ -470,7 +491,7 @@ public class MainActivityInsane extends BaseGameActivity {
 		//submit score to google play service
 		if(getApiClient().isConnected()){
 			leaderboardsMessage.setVisibility(View.GONE);
-			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.insane_leaderboard), score);
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.survivor_leaderboard), score);
 		}else{
 			leaderboardsMessage.setVisibility(View.VISIBLE);
 		}
@@ -480,10 +501,10 @@ public class MainActivityInsane extends BaseGameActivity {
 	
 	//method to sync best score
 	private void syncBestScore(){
-		boolean needSync = storage.getBoolean("needSync4by4",true);
+		boolean needSync = storage.getBoolean("needSyncSurvivor",true);
 		if(needSync && getApiClient().isConnected()){
-			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.insane_leaderboard), storage.getInt("bestScore4by4",0));
-			storageEdit.putBoolean("needSync4by4", false);
+			Games.Leaderboards.submitScore(getApiClient(), getString(R.string.survivor_leaderboard), storage.getInt("bestScoreSurvivor",0));
+			storageEdit.putBoolean("needSyncSurvivor", false);
 			storageEdit.commit();
 		}
 	}
@@ -492,32 +513,24 @@ public class MainActivityInsane extends BaseGameActivity {
 	public void retryClicked(View view){
 		playClickSound();
 		//get new answer
-		answer = random.nextInt(16);
-		setSquareColourM(answer,answerButton);
+		answer = random.nextInt(4);
+		setSquareColour(answer,answerButton);
 		//score and time views reset
 		score = 0;
 		timerView.setText("30.00");
 		scoreView.setText("0");
+		health = 50;
+		healthBar.setProgress(health);
+		healthDropRate = 150;
+		healthDropCounter = 0;
 		//reset squares
-		for (int i = 0; i < 16; i++){
+		for (int i = 0; i < 4; i++){
 			squares[i] = i;
 		}
-		setSquareColourM(squares[0],square1);
-		setSquareColourM(squares[1],square2);
-		setSquareColourM(squares[2],square3);
-		setSquareColourM(squares[3],square4);
-		setSquareColourM(squares[4],square5);
-		setSquareColourM(squares[5],square6);
-		setSquareColourM(squares[6],square7);
-		setSquareColourM(squares[7],square8);
-		setSquareColourM(squares[8],square9);
-		setSquareColourM(squares[9],square10);
-		setSquareColourM(squares[10],square11);
-		setSquareColourM(squares[11],square12);
-		setSquareColourM(squares[12],square13);
-		setSquareColourM(squares[13],square14);
-		setSquareColourM(squares[14],square15);
-		setSquareColourM(squares[15],square16);
+		setSquareColourTL(squares[0],square1);
+		setSquareColourTR(squares[1],square2);
+		setSquareColourBL(squares[2],square3);
+		setSquareColourBR(squares[3],square4);
 		//show proper views and start pre game timer
 		gameOverView.setVisibility(View.GONE);
 		preGameTimerView.setVisibility(View.VISIBLE);
@@ -602,7 +615,7 @@ public class MainActivityInsane extends BaseGameActivity {
 
 	@Override
 	public void onSignInSucceeded(){}
-
+	
 	/*CHART BOOST EXTEND*/
 	@Override
 	public void onStart() {

@@ -3,6 +3,7 @@ package com.jchingdev.squares;
 import com.jchingdev.squares.singleplayer.MainActivityNormal;
 import com.jchingdev.squares.singleplayer.MainActivityHard;
 import com.jchingdev.squares.singleplayer.MainActivityInsane;
+import com.jchingdev.squares.singleplayer.MainActivitySurvivor;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ public class GameModeMenu extends FragmentActivity {
 	private TextView bestScoreClassicView;
 	private TextView bestScoreChallengeView;
 	private TextView bestScoreInsaneView;
+	private TextView bestScoreSurvivorView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class GameModeMenu extends FragmentActivity {
 		bestScoreClassicView = (TextView)findViewById(R.id.bestScoreClassic);
 		bestScoreChallengeView = (TextView)findViewById(R.id.bestScoreChallenge);
 		bestScoreInsaneView = (TextView)findViewById(R.id.bestScoreInsane);
+		bestScoreSurvivorView = (TextView)findViewById(R.id.bestScoreSurvivor);
 		displayBestScores();
 	}
 	
@@ -56,6 +59,7 @@ public class GameModeMenu extends FragmentActivity {
 		bestScoreClassicView.setText("BEST: "+String.valueOf(storage.getInt("bestScore", 0)));
 		bestScoreChallengeView.setText("BEST: "+String.valueOf(storage.getInt("bestScore3by3", 0)));
 		bestScoreInsaneView.setText("BEST: "+String.valueOf(storage.getInt("bestScore4by4", 0)));
+		bestScoreSurvivorView.setText("BEST: "+String.valueOf(storage.getInt("bestScoreSurvivor", 0)));
 	}
 	
 	//classic mode button pressed
@@ -86,6 +90,17 @@ public class GameModeMenu extends FragmentActivity {
 			clickSound.start();
 		}
 		Intent intent = new Intent(this, MainActivityInsane.class);
+		finish();
+		startActivity(intent);
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+	}
+	
+	//survivor mode button pressed
+	public void survivorClicked(View view){
+		if (storage.getBoolean("volume",true)){
+			clickSound.start();
+		}
+		Intent intent = new Intent(this, MainActivitySurvivor.class);
 		finish();
 		startActivity(intent);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);

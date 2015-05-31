@@ -6,7 +6,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.games.Games;
 
 import com.google.example.games.basegameutils.BaseGameActivity;
-
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
