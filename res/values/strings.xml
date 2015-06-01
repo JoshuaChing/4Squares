@@ -20,6 +20,7 @@
     <string name="leaderboards_message">*Sign into Google Play to submit your scores to the leaderboards!</string>
     <string name="speedUp">SPEED UP!</string>
     <string name="boost">BOOST</string>
+    <string name="freeze">FREEZE</string>
 
     <!-- MENU -->
     <string name="title">4 SQUARES</string>

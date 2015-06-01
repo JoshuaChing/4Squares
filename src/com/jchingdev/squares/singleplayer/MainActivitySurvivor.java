@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -75,6 +76,10 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	private int healthDropCounter;
 	private int streak;
 	private boolean isGameOver;
+	private Runnable healthTracker;
+	private Handler healthTrackerHandler;
+	private boolean isFrozen;
+	private boolean isCrazy;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +144,9 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		healthDropCounter = 0;
 		streak = 0;
 		isGameOver = false;
+		isFrozen = false;
+		isCrazy = false;
+		setUpThread();
 		startPreGameTimer();
 	}
 
@@ -190,6 +198,19 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		int temp = c[i];
 		c[i] = c[j];
 		c[j] = temp;
+	}
+	
+	//function to set up handler
+	private void setUpThread(){
+		healthTrackerHandler = new Handler();
+		healthTracker = new Runnable(){
+			public void run(){
+				if(health==0)
+					timer.cancel();
+				healthTrackerHandler.postDelayed(this,100);
+			}
+		};
+		healthTrackerHandler.postDelayed(healthTracker, 100);
 	}
 	
 	public void answerClicked(View view){
@@ -336,7 +357,8 @@ public class MainActivitySurvivor extends BaseGameActivity {
 			scoreView.setText(String.valueOf(score));
 			
 			//streak
-			manageStreak();
+			if(!isFrozen)
+				manageStreak();
 			
 			//add health
 			if(health<100){
@@ -358,9 +380,18 @@ public class MainActivitySurvivor extends BaseGameActivity {
 			streakView.setText("x"+String.valueOf(streak));
 			streakView.setVisibility(View.VISIBLE);
 		}
-		if(streak > 9){
+		if (streak > 49){
+			boostButton.setVisibility(View.VISIBLE);
+			streakView.setTextColor(getResources().getColor(R.color.orange));
+			boostButton.setBackgroundResource(R.drawable.m_orange);
+		}else if(streak > 29){
+			boostButton.setVisibility(View.VISIBLE);
+			streakView.setTextColor(getResources().getColor(R.color.blue4));
+			boostButton.setBackgroundResource(R.drawable.m_blue4);
+		}else if(streak > 9){
 			boostButton.setVisibility(View.VISIBLE);
 			streakView.setTextColor(getResources().getColor(R.color.purple));
+			boostButton.setBackgroundResource(R.drawable.m_purple);
 		}else{
 			boostButton.setVisibility(View.INVISIBLE);
 			streakView.setTextColor(getResources().getColor(R.color.health_bar));
@@ -372,7 +403,6 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		boostButton.setVisibility(View.INVISIBLE);
 		streak = 0;
 		streakView.setVisibility(View.INVISIBLE);
-		streakView.setTextColor(getResources().getColor(R.color.health_bar));
 		
 		final View cover = (View)findViewById(R.id.wrongAnswer);
 		cover.setBackgroundResource(R.color.red_trans60);
@@ -381,7 +411,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		square3.setEnabled(false);
 		square4.setEnabled(false);
 		boostButton.setEnabled(false);
-		timer = new CountDownTimer(3000, 100) {
+		timer = new CountDownTimer(1000, 100) {
 		     public void onTick(long millisUntilFinished) {}
 
 		     public void onFinish() {
@@ -397,18 +427,20 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	
 	//speed up function
 	private void speedUp(){
-		if(healthDropRate > 1){
-			if (healthDropRate > 70)
-				healthDropRate -= 20;
-			else if (healthDropRate > 50)
-				healthDropRate -= 10;
-			else if(healthDropRate > 30)
-				healthDropRate -= 5;
-			else if (healthDropRate > 10)
-				healthDropRate -= 2;
-			else
-				healthDropRate --;
-			animateSpeedUp();
+		if(!isFrozen){
+			if(healthDropRate > 1){
+				if (healthDropRate > 70)
+					healthDropRate -= 20;
+				else if (healthDropRate > 50)
+					healthDropRate -= 10;
+				else if(healthDropRate > 30)
+					healthDropRate -= 5;
+				else if (healthDropRate > 10)
+					healthDropRate -= 2;
+				else
+					healthDropRate --;
+				animateSpeedUp();
+			}
 		}
 	}
 	
@@ -442,21 +474,22 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	
 	//function to manage help
 	private void calculateHealth(){
-		if(healthDropCounter >= healthDropRate){
-			healthDropCounter = 0;
-			health--;
-		}else{
-			healthDropCounter++;
-		}
+		if(!isFrozen){
+			if(healthDropCounter >= healthDropRate){
+				healthDropCounter = 0;
+				health--;
+			}else{
+				healthDropCounter++;
+			}
 		
-		healthBar.setProgress(health);
+			healthBar.setProgress(health);
 		
-		if(health <= 0){
-			isGameOver = true;
-			//play wrong sound
-			playWrongSound();
-			timer.cancel();
-			gameOver();
+			if(health <= 0){
+				isGameOver = true;
+				//play wrong sound
+				playWrongSound();
+				gameOver();
+			}
 		}
 	}
 	
@@ -558,14 +591,52 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		boostButton.setVisibility(View.INVISIBLE);
 		streakView.setVisibility(View.INVISIBLE);
 		int base = streak/2;
-		int bonus = (streak/10)*5;
+		int bonus = (streak/10)*3;
 		health += base + bonus;
 		score += base + bonus;
 		scoreView.setText(String.valueOf(score));
 		if(health>=100)
 			health = 100;
 		healthBar.setProgress(health);
+		
+		if(streak > 49){
+			isCrazy = true;
+			freezeBoost();
+		}else if(streak > 29)
+			freezeBoost();
+		
 		streak = 0;
+	}
+	
+	//freeze boost
+	private void freezeBoost(){
+		((ProgressBar) findViewById(R.id.freezeBar)).setProgress(100);
+		isFrozen = true;
+		findViewById(R.id.main_back).setBackgroundColor(getResources().getColor(R.color.blue4));
+		findViewById(R.id.freeze).setVisibility(View.VISIBLE);
+		
+		if(isCrazy){
+			findViewById(R.id.crazyAnswer).setVisibility(View.VISIBLE);
+			findViewById(R.id.crazyButton).setVisibility(View.VISIBLE);
+		}
+		
+		timer = new CountDownTimer(10000, 100) {
+		     public void onTick(long millisUntilFinished) {
+		    	 ((ProgressBar) findViewById(R.id.freezeBar)).setProgress((int)(millisUntilFinished/100.0));
+		     }
+
+		     public void onFinish() {
+		    	 ((ProgressBar) findViewById(R.id.freezeBar)).setProgress(0);
+		    	 isFrozen = false;
+		    	 findViewById(R.id.main_back).setBackgroundColor(getResources().getColor(R.color.black));
+		    	 findViewById(R.id.freeze).setVisibility(View.INVISIBLE);
+		    	 if(isCrazy){
+		 			findViewById(R.id.crazyAnswer).setVisibility(View.GONE);
+					findViewById(R.id.crazyButton).setVisibility(View.GONE);
+					isCrazy = false;
+		    	 }
+		     }
+		  }.start();
 	}
 	
 	//retry button clicked
@@ -583,7 +654,6 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		healthDropRate = 110;
 		healthDropCounter = 0;
 		streak = 0;
-		streakView.setTextColor(getResources().getColor(R.color.health_bar));
 		streakView.setVisibility(View.INVISIBLE);
 		boostButton.setVisibility(View.INVISIBLE);
 		findViewById(R.id.wrongAnswer).setBackgroundResource(R.color.transparent);
@@ -671,6 +741,17 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		if (volume){
 			wrongSound.start();
 		}
+	}
+	
+	//crazy button clicked
+	public void crazyButtonClicked(View view){
+		playClickSound();
+		if(health < 100){
+			health++;
+			healthBar.setProgress(health);
+		}
+		score++;
+		scoreView.setText(String.valueOf(score));
 	}
 	
 	/*GOOGLE PLAY SERVICE (BASEGAMEACTIVITY)*/
