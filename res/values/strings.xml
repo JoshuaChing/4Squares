@@ -32,7 +32,7 @@
 
     <!-- MENU -->
     <string name="title">4 SQUARES</string>
-    <string name="play">SOLO PLAY</string>
+    <string name="play">PLAY</string>
     <string name="multiplayerPlay">ONLINE PLAY</string>
     <string name="leaderboards">LEADERBOARDS</string>
     <string name="copyright">© JOSHUA CHING 2014</string>

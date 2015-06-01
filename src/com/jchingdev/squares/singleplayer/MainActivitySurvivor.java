@@ -726,7 +726,8 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		if(Chartboost.onBackPressed()){
 			return;
 		}else{
-			timer.cancel();
+			if(timer!=null)
+				timer.cancel();
 			Intent intent = new Intent(this, GameModeMenu.class);
 			finish();
 			startActivity(intent);
@@ -795,7 +796,8 @@ public class MainActivitySurvivor extends BaseGameActivity {
 	@Override
 	public void onDestroy() {
 	    super.onDestroy();
-	    timer.cancel();
+	    if(timer!=null)
+	    	timer.cancel();
 	    Chartboost.onDestroy(this);
 	}
 	
