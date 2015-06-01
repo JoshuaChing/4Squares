@@ -140,14 +140,13 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		score = 0;
 		health = 50;
 		healthBar.setProgress(health);
-		healthDropRate = 110;
+		healthDropRate = 90;
 		healthDropCounter = 0;
 		streak = 0;
 		isGameOver = false;
 		isFrozen = false;
 		isCrazy = false;
 		setUpThread();
-		startPreGameTimer();
 	}
 
 	@Override
@@ -155,6 +154,13 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	//play button clicked
+	public void playClicked(View view){
+		playClickSound();
+		findViewById(R.id.ftue).setVisibility(View.GONE);
+		startPreGameTimer();
 	}
 	
 	//returns point of screen size
@@ -650,7 +656,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		scoreView.setText("0");
 		health = 50;
 		healthBar.setProgress(health);
-		healthDropRate = 110;
+		healthDropRate = 90;
 		healthDropCounter = 0;
 		streak = 0;
 		streakView.setVisibility(View.INVISIBLE);

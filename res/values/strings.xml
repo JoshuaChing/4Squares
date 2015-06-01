@@ -21,6 +21,14 @@
     <string name="speedUp">SPEED UP!</string>
     <string name="boost">BOOST</string>
     <string name="freeze">FREEZE</string>
+    <string name="survivorTitle">SURVIVAL MODE</string>
+    <string name="survivorFTUE">Pick the correct colors to keep your health up.
+        \n \n There are 3 types of boosts that enables at:
+        \n \n \nstreak 10 - gain health
+        \n \nstreak 30 - gain health, freeze time
+        \n \nstreak 50 - gain health, freeze time, the button
+        \n \nGood luck!</string>
+    <string name="start">START</string>
 
     <!-- MENU -->
     <string name="title">4 SQUARES</string>
