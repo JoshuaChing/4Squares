@@ -205,7 +205,7 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		healthTrackerHandler = new Handler();
 		healthTracker = new Runnable(){
 			public void run(){
-				if(health==0)
+				if(health<=0)
 					timer.cancel();
 				healthTrackerHandler.postDelayed(this,100);
 			}
@@ -498,7 +498,6 @@ public class MainActivitySurvivor extends BaseGameActivity {
 		isGameOver=false;
 		timer = new CountDownTimer(10000, 10) {
 		     public void onTick(long millisUntilFinished) {
-		 		System.out.println(healthDropCounter +":"+ healthDropRate);
 		    	 if(!isGameOver){
 		    		 timerView.setText(String.valueOf(new DecimalFormat("##.##").format((millisUntilFinished/1000.0))));
 		    		 calculateHealth();
